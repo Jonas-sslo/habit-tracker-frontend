@@ -11,7 +11,7 @@ export default function LoginForm() {
   // Criar tela para esqueceu a senha
   // Criar tela para registrar-se
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     // Logica pra login
