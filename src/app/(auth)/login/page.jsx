@@ -12,10 +12,10 @@ export default function Login() {
         e.preventDefault();
         try {
             const data = await handleLogin(formData);
-            console.log('✅ Login realizado:', data);
+            console.log('Login realizado:', data);
             // router.push('/home'); TODO: Implementar a tela de redirecionamento após login
         } catch (err) {
-            console.error('❌ Erro no login:', err.message);
+            console.error('Erro no login:', err.message);
         }
     };
 

@@ -23,7 +23,6 @@ export async function handleGoogleLogin(credentialResponse) {
     const data = await loginWithGoogleToken(token);
 
     if (!data?.token) throw new Error('Token não recebido do Google');
-    console.log('Login com Google realizado com sucesso:', data);
 
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.name));
