@@ -1,12 +1,22 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { handleLogin } from './actions';
 import AuthForm from '../../components/features/auth/login/AuthForm';
 import Logo from '../../components/features/auth/login/Logo';
 
 export default function Login() {
-    const handleSubmit = (e) => {
+    const router = useRouter();
+
+    const handleSubmit = async (e, formData) => {
         e.preventDefault();
-        console.log('Formulário enviado (mock)');
+        try {
+            const data = await handleLogin(formData);
+            console.log('✅ Login realizado:', data);
+            // router.push('/home'); TODO: Implementar a tela de redirecionamento após login
+        } catch (err) {
+            console.error('❌ Erro no login:', err.message);
+        }
     };
 
     return (
