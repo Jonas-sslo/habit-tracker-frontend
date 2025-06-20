@@ -3,11 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { handleLogin } from './actions';
 import AuthForm from '../../components/features/auth/login/AuthForm';
-import Logo from '../../components/features/auth/login/Logo';
+import Logo from '../../components/features/auth/Logo';
 
 export default function Login() {
     const router = useRouter();
-
     const handleSubmit = async (e, formData) => {
         e.preventDefault();
         try {

@@ -8,7 +8,7 @@ export default function Button({
     className = '',
     ...props
 }) {
-    const base = 'font-medium rounded-md shadow-sm transition-all focus:outline-none';
+    const base = 'font-medium rounded-md shadow-sm transition-all focus:outline-none cursor-pointer';
 
     const sizes = {
         sm: 'px-3 py-1 text-sm',
