@@ -1,15 +1,24 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { handleRegister } from './actions';
 import RegisterForm from '../../components/features/auth/register/RegisterForm';
 import Logo from '../../components/features/auth/Logo';
 
 export default function Register() {
-    const handleSubmit = (e, formData) => {
+    const router = useRouter();
+    const handleSubmit = async (e, formData) => {
         e.preventDefault();
-        console.log("Cadastro realizado com sucesso!");
-        console.log("Dados do formulário:", formData);
-        // TODO
-        // consumir api
+        try {
+            const data = await handleRegister(formData);
+            console.log('Registro realizado:', data);
+            router.push('/login');
+        } catch (err) {
+            alert('Erro ao registrar. Por favor, tente novamente.');
+            // TODO
+            // Substituir por um componente de notificação
+            console.error('Erro no registro:', err.message);
+        }
     };
 
     return (

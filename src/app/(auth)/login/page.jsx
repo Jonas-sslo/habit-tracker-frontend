@@ -12,8 +12,13 @@ export default function Login() {
         try {
             const data = await handleLogin(formData);
             console.log('Login realizado:', data);
-            // router.push('/home'); TODO: Implementar a tela de redirecionamento após login
+            router.push('/home');
+            // TODO
+            // Envolver outras telas com a autenticação
         } catch (err) {
+            alert('Erro no login. Por favor, tente novamente.');
+            // TODO
+            // Substituir por um componente de notificação
             console.error('Erro no login:', err.message);
         }
     };

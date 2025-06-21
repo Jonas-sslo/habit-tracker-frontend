@@ -2,10 +2,9 @@ import Input from '../Input';
 import Button from '../../../Button';
 import Switch from './Switch';
 import Divider from '../../../Divider';
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { handleGoogleLogin, handleGoogleLoginError } from '@/app/(auth)/login/actions';
 import { GoogleLogin } from '@react-oauth/google';
+import PasswordInput from '../PasswordInput';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -14,10 +13,6 @@ export default function AuthForm({ onSubmit }) {
         email: '',
         password: '',
     });
-    const [showPassword, setShowPassword] = useState(false);
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
 
     return (
         <div className="flex flex-col justify-start w-full h-full p-12">
@@ -33,27 +28,14 @@ export default function AuthForm({ onSubmit }) {
                     placeholder="Insira o email" 
                     required 
                 />
-                <div className="relative">
-                    <Input 
-                        id="password" 
-                        label="Senha" 
-                        type={showPassword ? "text" : "password"}
-                        value={formData.password} 
-                        onChange={(e) => setFormData({ ...formData, password: e.target.value })} 
-                        placeholder="Insira a senha" 
-                        required 
-                    />
-                    <button 
-                        type="button"
-                        onClick={togglePasswordVisibility}
-                        className="absolute right-3 top-8.5 cursor-pointer"
-                    >
-                        {showPassword 
-                            ? <Visibility className="text-gray-700"/> 
-                            : <VisibilityOff className="text-gray-700"/> 
-                        }
-                    </button>
-                </div>
+                <PasswordInput
+                    id="password"
+                    label="Senha"
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    placeholder="Insira a senha"
+                    required
+                />
                 <Switch />
                 <Button type="submit" className="w-full">
                     Entrar

@@ -2,23 +2,15 @@ import Input from "../Input";
 import Button from '../../../Button';
 import Divider from '../../../Divider';
 import Link from 'next/link';
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import PasswordInput from "../PasswordInput";
 import { useState } from "react";
 
 export default function RegisterForm({ onSubmit }) {
     const [formData, setFormData] = useState({
-        name: '',
         email: '',
-        password: ''
+        password: '', 
+        name: ''
     })
-    const [showPassword, setShowPassword] = useState(false);
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    //TODO 
-    // ver de isolar o botao para mostrar senha
     
     return (
         <div className="flex flex-col justify-start w-full h-full p-12">
@@ -43,27 +35,14 @@ export default function RegisterForm({ onSubmit }) {
                     placeholder="Email" 
                     required 
                 />
-                <div className="relative">
-                    <Input 
-                        id="password" 
-                        label="Senha" 
-                        type={showPassword ? "text" : "password"}
-                        value={formData.password} 
-                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                        placeholder="Senha" 
-                        required 
-                    />
-                    <button 
-                        type="button"
-                        onClick={togglePasswordVisibility}
-                        className="absolute right-3 top-8.5 cursor-pointer"
-                    >
-                        {showPassword 
-                            ? <Visibility className="text-gray-700"/> 
-                            : <VisibilityOff className="text-gray-700"/> 
-                        }
-                    </button>
-                </div>
+                <PasswordInput
+                    id="password" 
+                    label="Senha" 
+                    value={formData.password} 
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })} 
+                    placeholder="Senha" 
+                    required
+                />
                 <Button type="submit" className="w-full">
                     Registrar
                 </Button>
