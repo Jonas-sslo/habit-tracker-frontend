@@ -8,9 +8,9 @@ import { AcUnit, BoltOutlined, Filter, FilterAlt, FilterAltOutlined, Instagram, 
 export default function LandingPage() {
 
         const router = useRouter();
-    
-        const onLogin = () => {
-            router.push('/login');
+
+        const onRegister = () => {
+            router.push('/register');
         }
 
     return (
@@ -31,11 +31,11 @@ export default function LandingPage() {
                             <br></br>
                             cheque seu histórico e transforme sua jornada.
                         </h1>
-                        <button className="rounded-4xl text-center bg-white w-40 cursor-pointer text-m font-bold p-4" onClick={onLogin}>
+                        <button className="rounded-4xl text-center bg-white w-40 cursor-pointer text-m font-bold p-4" onClick={onRegister}>
                                 Comece Agora
                         </button>
                     </div>
-                    <button className="rounded-4xl text-center bg-neutral-800 text-white w-50 cursor-pointer text-xs font-bold p-1 justify-self-end" onClick={onLogin}>
+                    <button className="rounded-4xl text-center bg-neutral-800 text-white w-50 cursor-pointer text-xs font-bold p-1 justify-self-end" onClick={onRegister}>
                             <Star htmlColor='#FBBF24' fontSize='small' className='mr-2'/>
                             Experimente a Mudança
                     </button>
@@ -92,7 +92,7 @@ export default function LandingPage() {
                             você desenvolve consistência, foca no que realmente importa e evolui continuamente.
                             Um pequeno passo por vez, rumo à sua melhor versão.
                         </p>
-                        <button className="rounded-4xl text-center bg-[#FFC857] text-white w-40 h-12 cursor-pointer text-xs font-bold p-1 justify-self-end" onClick={onLogin}>
+                        <button className="rounded-4xl text-center bg-[#FFC857] text-white w-40 h-12 cursor-pointer text-xs font-bold p-1 justify-self-end" onClick={onRegister}>
                             Comece agora
                     </button>
                     </div>
