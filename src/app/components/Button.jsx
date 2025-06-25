@@ -9,7 +9,7 @@ export default function Button({
     disabled=false,
     ...props
 }) {
-    const base = 'font-medium rounded-md shadow-sm transition-all focus:outline-none';
+    const base = 'font-medium rounded-full shadow-sm transition-all focus:outline-none';
 
     const sizes = {
         sm: 'px-3 py-1 text-sm',
@@ -36,6 +36,17 @@ export default function Button({
             ghost: 'text-[#96031A] hover:bg-[#96031A]/10',
             disabled: 'bg-[#2549BE] text-white opacity-50 cursor-not-allowed'
         },
+        white: {
+            solid: 'bg-white text-black hover:bg-gray-100 cursor-pointer',
+            outline: 'border border-white text-white hover:bg-white hover:text-black cursor-pointer',
+            ghost: 'text-white hover:bg-white/10',
+        },
+        gray: {
+            solid: 'bg-gray-200 text-black hover:bg-gray-300 cursor-pointer px-8',
+            outline: 'border border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-black cursor-pointer',
+            ghost: 'text-gray-200 hover:bg-gray-200/10',
+            disabled: 'bg-gray-200 text-black opacity-50 cursor-not-allowed'
+        }
     };
 
     const selectedStyle = colors[color]?.[variant] || colors.primary.solid;

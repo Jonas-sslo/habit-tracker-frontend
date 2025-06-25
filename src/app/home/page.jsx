@@ -3,8 +3,11 @@
 import { useEffect, useState } from 'react';
 import { getHabits } from '@/services/api';
 import { useRouter } from 'next/navigation';
-import { format, isSameMonth, isSameWeek, isSameDay, parseISO, startOfWeek, addDays } from 'date-fns';
+import { format, isSameMonth, isSameDay, parseISO, startOfWeek, addDays } from 'date-fns';
+import AddIcon from '@mui/icons-material/Add';
 import ptBR from 'date-fns/locale/pt-BR';
+import Button from '../components/Button';
+import Sidebar from '../components/Sidebar';
 
 export default function Home() {
   const [habits, setHabits] = useState([]);
@@ -20,17 +23,8 @@ export default function Home() {
     fetch();
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    router.push('/login');
-  };
-
   const goToAddHabit = () => {
     router.push('/habits/add');
-  };
-
-  const goToProfile = () => {
-    router.push('/profile');
   };
 
   const renderView = (habit) => {
@@ -106,42 +100,34 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Meus Hábitos</h1>
-        <div className="flex gap-4">
-          <select
-            value={view}
-            onChange={e => setView(e.target.value)}
-            className="p-2 rounded-md border border-gray-300"
-          >
-            <option value="anual">Anual</option>
-            <option value="mensal">Mensal</option>
-            <option value="semanal">Semanal</option>
-            <option value="diária">Diária</option>
-          </select>
-          <button
-            onClick={goToAddHabit}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-          >
-            Adicionar Hábito
-          </button>
-          <button
-            onClick={goToProfile}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-          >
-            Minha Conta
-          </button>
-          <button
-            onClick={logout}
-            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-          >
-            Sair
-          </button>
+  <div className="flex">
+    <Sidebar />
+    <div className="flex-1 p-4 ml-16 md:ml-20 lg:ml-24">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 py-5 gap-4">
+        <div className="flex flex-col">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold px-5">Seus Hábitos</h1>
+          <div className="text-lg md:text-lg py-4 px-5 text-gray-400">Acompanhe seu progresso ao longo do tempo</div>
+        </div>
+        <div className="flex flex-wrap gap-6 px-5 w-full md:w-auto">
+          <Button onClick={() => setView('anual')} color="gray">
+            Anual
+          </Button>
+          <Button onClick={() => setView('mensal')} color="gray">
+            Mensal
+          </Button>
+          <Button onClick={() => setView('semanal')} color="gray">
+            Semanal
+          </Button>
+          <Button onClick={() => setView('diária')} color="gray">
+            Diária
+          </Button>
+          <Button onClick={goToAddHabit} className="flex items-center gap-1">
+            <AddIcon /> Adicionar Hábito
+          </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
         {habits.map(habit => (
           <div key={habit.id} className="bg-white p-4 shadow rounded-lg">
             <h2 className="text-xl font-semibold mb-1">{habit.nome}</h2>
@@ -150,6 +136,7 @@ export default function Home() {
           </div>
         ))}
       </div>
-    </main>
-  );
+    </div>
+  </div>
+);
 }

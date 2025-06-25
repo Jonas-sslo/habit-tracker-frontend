@@ -7,8 +7,10 @@ import { GoogleLogin } from '@react-oauth/google';
 import PasswordInput from '../PasswordInput';
 import Link from 'next/link';
 import { useState } from 'react';
+import { isFormValid, validateEmailField } from '@/app/utils/validators';
 
 export default function AuthForm({ onSubmit, error, onClearError }) {
+    const [emailError, setEmailError] = useState(null);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -16,10 +18,10 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
     const handleChange = (e) =>  {
         const { id, value } = e.target;
         setFormData(prev => ({ ...prev, [id]: value}));
+        if (id === 'email') validateEmailField(value, setEmailError);
         if (error && onClearError) onClearError();
     };
-    const isFormValid = (formData.email.trim() && formData.password.trim());
-    const isButtonDisabled = !isFormValid || error;
+    const isButtonDisabled = !isFormValid(formData, emailError) || error;
 
     return (
         <div className="flex flex-col justify-start w-full h-full p-12">
@@ -30,12 +32,13 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                 <Input 
                     id="email" 
                     label="Login" 
-                    type="text" 
+                    type="email" 
                     value={formData.email} 
                     onChange={handleChange} 
                     placeholder="Insira o email" 
                     required 
                 />
+                {emailError && <div className="mb-4 text-red-500 text-sm">{emailError}</div>}
                 <PasswordInput
                     id="password"
                     label="Senha"
@@ -45,7 +48,7 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                     required
                 />
                 <Switch />
-                <Button type="submit" className="w-full" disabled={isButtonDisabled}>
+                <Button type="submit" className="w-full rounded-md" disabled={isButtonDisabled}>
                     Entrar
                 </Button>
             </form>
