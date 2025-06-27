@@ -6,6 +6,9 @@ export default function Sidebar() {
   const onHome = () => {
       router.push('/home');
   };
+  const onStatistics = () => {
+    router.push('/statistics');
+  };
   const onProfile = () => {
       router.push('/profile');
   };
@@ -28,8 +31,8 @@ export default function Sidebar() {
         <button onClick={onHome} className="p-2 rounded-lg hover:bg-[#1a3a9a]">
           <HomeOutlined />
         </button>
-        <button onClick={onHome} className="p-2 rounded-lg hover:bg-[#1a3a9a]">
-          <ShowChart />
+        <button onClick={onStatistics} className="p-2 rounded-lg hover:bg-[#1a3a9a]">
+        <ShowChart />
         </button>
       </div>
 
