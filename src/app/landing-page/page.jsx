@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import NavBar  from '@/app/components/features/landing-page/NavBar'
+import Image from 'next/image'
 import { AcUnit, BoltOutlined, FilterAltOutlined, Instagram, LinkedIn, ShowChart, Star } from '@mui/icons-material';
 
 export default function LandingPage() {
@@ -12,10 +13,10 @@ export default function LandingPage() {
 
     return (
         <main className='min-h-screen bg-gray-100 scroll-smooth'>
-            <div className='flex justify-between items-center w-full bg-[#0c6dff] fixed'>
+            <div className='flex justify-between items-center w-full bg-[#2549BE] fixed'>
                 <NavBar/>
             </div>
-            <div className='flex items-center bg-[#0c6dff] w-full h-screen p-6 justify-center pt-24' id="start">
+            <div className='flex items-center bg-[#2549BE] w-full h-screen p-6 justify-center pt-24' id="start">
                 <div className='flex flex-col justify-between items-center text-center h-full'>
                     <div className='flex flex-col items-center gap-2 mt-10'>
                         <h1 className='text-white text-5xl mb-4'>
@@ -77,8 +78,18 @@ export default function LandingPage() {
                     </div>
                 </div>
                 <div className='rounded-xl flex justify-between items-end w-334 h-132 bg-[#DBEDFB] self-center p-16 mt-16' id='start-now'>
-                    <div className='flex flex-col justify-end w-80 h-fit gap-12'>
-                        <AcUnit fontSize='large' />
+                    <div className='flex flex-col justify-end w-80 h-fit gap-8'>
+                        <div className='w-full h-32'>
+                            <Image
+                            src='/logo-icon-black.png'
+                            alt='logo'
+                            style={{
+                                objectFit: 'contain',
+                            }}
+                            width={160}
+                            height={160}
+                            />
+                        </div>
                         <h1 className='font-400 text-6xl/20 text-gray-900'>
                             Pronto para estabelecer hábitos?
                         </h1>
@@ -96,7 +107,15 @@ export default function LandingPage() {
                 </div>
                 <div className='rounded-xl flex flex-col items-center justify-center w-334 h-98 bg-neutral-800 self-center gap-6 mt-12'>
                     <div className='flex text-white gap-1'>
-                        <AcUnit />
+                        <Image
+                        src='/logo-icon-white.png'
+                        alt='logo'
+                        style={{
+                            objectFit: 'contain'
+                        }}
+                        width={28}
+                        height={28}
+                        />
                         <h1>
                         Constantia 
                         </h1>

@@ -28,7 +28,7 @@ export default function NavBar() {
                 <div className="container mx-auto px-4 h-full">
                     <div className="flex justify-between items-center h-full">
                         <div className="relative w-60 h-full">
-                            <Image src="/login-background.png"
+                            <Image src="/logo-white.png"
                             alt = "logo"
                             fill
                             style = {imageStyle}

@@ -26,8 +26,8 @@ export default function Login() {
 
     return (
         <div className="flex h-screen">
-            <div className="w-4/6">
-                <Logo src="/login-background.png" fill priority />
+            <div className="w-4/6 bg-[#2549BE]">
+                <Logo src="/logo-white.png" fill priority />
             </div>
             <div className="w-2/6">
                 <AuthForm 
