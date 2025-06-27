@@ -1,17 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import NavBar  from '@/app/components/features/landing-page/NavBar'
-import { AcUnit, BoltOutlined, Filter, FilterAlt, FilterAltOutlined, Instagram, LinkedIn, ShowChart, Star } from '@mui/icons-material';
+import { AcUnit, BoltOutlined, FilterAltOutlined, Instagram, LinkedIn, ShowChart, Star } from '@mui/icons-material';
 
 export default function LandingPage() {
-
-        const router = useRouter();
-
-        const onRegister = () => {
-            router.push('/register');
-        }
+    const router = useRouter();
+    const onRegister = () => {
+        router.push('/register');
+    };
 
     return (
         <main className='min-h-screen bg-gray-100 scroll-smooth'>

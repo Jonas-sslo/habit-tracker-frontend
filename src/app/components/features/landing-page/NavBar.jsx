@@ -2,27 +2,25 @@
 
 import React from "react";
 import Image from 'next/image'
-import Logo from "./../auth/Logo"
 import { useRouter } from 'next/navigation';
-import Button from "../../Button";
 
 export default function NavBar() {
     const imageStyle = {
         objectFit: 'cover'
-    }
+    };
 
     const router = useRouter();
 
     const goToLogin = () => {
         router.push('/login');
-    }
+    };
 
     const scrollToSection = (sectionId) => {
         const element = document.getElementById(sectionId);
         if (element) {
             element.scrollIntoView({behavior: 'smooth'});
         }
-    }
+    };
 
     return (
         <>

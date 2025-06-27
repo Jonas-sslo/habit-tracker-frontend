@@ -15,6 +15,7 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
         email: '',
         password: '',
     });
+    
     const handleChange = (e) =>  {
         const { id, value } = e.target;
         setFormData(prev => ({ ...prev, [id]: value}));

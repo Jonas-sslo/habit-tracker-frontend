@@ -12,10 +12,13 @@ import Sidebar from '../components/Sidebar';
 export default function Home() {
   const [habits, setHabits] = useState([]);
   const [view, setView] = useState('anual');
+  const [userName, setUserName] = useState('Usuário');
   const router = useRouter();
   const today = new Date();
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) setUserName(user);
     async function fetch() {
       const data = await getHabits();
       setHabits(data);
@@ -100,43 +103,42 @@ export default function Home() {
   };
 
   return (
-  <div className="flex">
-    <Sidebar />
-    <div className="flex-1 p-4 ml-16 md:ml-20 lg:ml-24">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 py-5 gap-4">
-        <div className="flex flex-col">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold px-5">Seus Hábitos</h1>
-          <div className="text-lg md:text-lg py-4 px-5 text-gray-400">Acompanhe seu progresso ao longo do tempo</div>
-        </div>
-        <div className="flex flex-wrap gap-6 px-5 w-full md:w-auto">
-          <Button onClick={() => setView('anual')} color="gray">
-            Anual
-          </Button>
-          <Button onClick={() => setView('mensal')} color="gray">
-            Mensal
-          </Button>
-          <Button onClick={() => setView('semanal')} color="gray">
-            Semanal
-          </Button>
-          <Button onClick={() => setView('diária')} color="gray">
-            Diária
-          </Button>
-          <Button onClick={goToAddHabit} className="flex items-center gap-1">
-            <AddIcon /> Adicionar Hábito
-          </Button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
-        {habits.map(habit => (
-          <div key={habit.id} className="bg-white p-4 shadow rounded-lg">
-            <h2 className="text-xl font-semibold mb-1">{habit.nome}</h2>
-            <p className="text-gray-500 mb-2">{habit.frequencia}</p>
-            {renderView(habit)}
+    <div className="flex h-screen bg-[#DBEDFB] overflow-x-hidden">
+      <Sidebar />
+      <div className="flex-1 p-4 ml-16 md:ml-20 lg:ml-24">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 py-2">
+          <div className="flex flex-col px-5">
+            <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold pb-2">Olá, {userName}</h1>
+            <div className="text-lg text-gray-400">Acompanhe seu progresso ao longo do tempo</div>
           </div>
-        ))}
+        </div>
+
+        <div className="-ml-16 md:-ml-20 lg:-ml-24 -mr-4">
+          <div className="h-px bg-[#2549BE] my-6" />
+        </div>
+
+        <div className="flex flex-wrap gap-6 px-5 w-full md:w-auto">
+          <h2 className="text-2xl font-semibold">Seus hábitos</h2>
+          <div className='flex row gap-4'>
+            <Button color='danger' className="flex items-center gap-1">
+              <AddIcon /> Adicionar Tag
+            </Button>
+            <Button onClick={goToAddHabit} className="flex items-center gap-1">
+              <AddIcon /> Adicionar Hábito
+            </Button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
+          {habits.map(habit => (
+            <div key={habit.id} className="bg-white p-4 shadow rounded-lg">
+              <h2 className="text-xl font-semibold mb-1">{habit.nome}</h2>
+              <p className="text-gray-500 mb-2">{habit.frequencia}</p>
+              {renderView(habit)}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }

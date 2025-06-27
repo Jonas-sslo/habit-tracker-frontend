@@ -13,6 +13,7 @@ export default function RegisterForm({ onSubmit, error, onClearError }) {
         password: '', 
         name: ''
     });
+    
     const handleChange = (e) => {
         const { id, value } = e.target;
         setFormData(prev => ({ ...prev, [id]: value }));
