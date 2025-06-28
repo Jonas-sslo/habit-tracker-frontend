@@ -26,9 +26,9 @@ export default function Register() {
             router.push('/login');
         } catch (err) {
             console.error('Erro no registro:', err.message);
-            err.response?.status === 400 
-                ? setError("Este usuário já existe!")
-                : setError("Ocorreu um erro durante o registro!");
+            err.response?.status === 400
+                ? setError('Este usuário já existe!')
+                : setError('Ocorreu um erro durante o registro!');
         }
     };
 
@@ -38,12 +38,12 @@ export default function Register() {
                 <Logo src={getLogo(theme)} fill priority />
             </div>
             <div className="w-2/6">
-                <RegisterForm 
+                <RegisterForm
                     onSubmit={handleSubmit}
                     error={error}
-                    onClearError={() => setError(null)} 
+                    onClearError={() => setError(null)}
                 />
             </div>
         </div>
-    )
+    );
 }

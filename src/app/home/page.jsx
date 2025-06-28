@@ -70,10 +70,9 @@ export default function Home() {
       streak++;
       day = subDays(day, 1);
     }
-
     setActiveStreak(streak);
   };
-
+  
   const applyFilters= (habits) => {
     return habits
       .filter(h => {

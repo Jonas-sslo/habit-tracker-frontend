@@ -22,13 +22,13 @@ export default function Login() {
         e.preventDefault();
         try {
             const data = await handleLogin(formData);
-            console.log("Login realizado: ", data);
-            router.push("/home");
+            console.log('Login realizado: ', data);
+            router.push('/home');
         } catch (err) {
-            console.error("Erro no login: ", err.message);
+            console.error('Erro no login: ', err.message);
             err.response?.status === 401
-                ? setError("Email ou senha inválidos!")
-                : setError("Ocorreu um erro durante o login!");
+                ? setError('Email ou senha inválidos!')
+                : setError('Ocorreu um erro durante o login!');
         }
     };
 
@@ -38,8 +38,8 @@ export default function Login() {
                 <Logo src={getLogo(theme)} fill priority />
             </div>
             <div className="w-2/6">
-                <AuthForm 
-                    onSubmit={handleSubmit} 
+                <AuthForm
+                    onSubmit={handleSubmit}
                     error={error}
                     onClearError={() => setError(null)}
                 />

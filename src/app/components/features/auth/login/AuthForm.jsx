@@ -19,10 +19,10 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
         email: '',
         password: '',
     });
-    
-    const handleChange = (e) =>  {
+
+    const handleChange = (e) => {
         const { id, value } = e.target;
-        setFormData(prev => ({ ...prev, [id]: value}));
+        setFormData((prev) => ({ ...prev, [id]: value }));
         if (id === 'email') validateEmailField(value, setEmailError);
         if (error && onClearError) onClearError();
     };
@@ -43,14 +43,14 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                 </div>
                 <h3 className="text-lg font-bold mb-4">É bom te ver de novo</h3>
                 {error && <div className="mb-4 text-red-600">{error}</div>}
-                <Input 
-                    id="email" 
-                    label="Login" 
-                    type="email" 
-                    value={formData.email} 
-                    onChange={handleChange} 
-                    placeholder="Insira o email" 
-                    required 
+                <Input
+                    id="email"
+                    label="Login"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Insira o email"
+                    required
                 />
                 {emailError && <div className="mb-4 text-red-500 text-sm">{emailError}</div>}
                 <PasswordInput

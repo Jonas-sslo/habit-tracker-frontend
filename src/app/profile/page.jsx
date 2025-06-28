@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Image from "next/image";
-import { AccountCircle } from "@mui/icons-material";
-import Input from "../components/features/auth/Input";
-import { getUser } from "./actions";
+import { useEffect, useState } from 'react';
+import Sidebar from '../components/Sidebar';
+import Image from 'next/image';
+import { AccountCircle } from '@mui/icons-material';
+import Input from '../components/features/auth/Input';
+import { getUser } from './actions';
 
 export default function Profile() {
   const [userName, setUserName] = useState('Usuário');
@@ -54,9 +54,9 @@ export default function Profile() {
                   className="rounded-full object-cover border-4 border-gray-200"
                 />
               ) : (
-                <AccountCircle 
-                  style={{ width: 300, height: 300 }} 
-                  className="text-gray-400" 
+                <AccountCircle
+                  style={{ width: 300, height: 300 }}
+                  className="text-gray-400"
                 />
               )}
             </div>
@@ -68,5 +68,5 @@ export default function Profile() {
         </div>
       </div>
     </div>
-  )
+  );
 }
