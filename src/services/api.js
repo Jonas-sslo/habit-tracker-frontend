@@ -17,7 +17,7 @@ api.interceptors.request.use(
     },
     (error) => {
         return Promise.reject(error);
-    }
+    },
 );
 
 /**
@@ -29,11 +29,11 @@ export async function getHabits() {
     try {
         const response = await api.get('/habits/all');
 
-        const habits = response.data.map(habit => ({
+        const habits = response.data.map((habit) => ({
             id: habit.id,
-            nome: habit.name, 
+            nome: habit.name,
             frequencia: habit.frequency,
-            diasFeitos: habit.completedDays || []
+            diasFeitos: habit.completedDays || [],
         }));
 
         return habits;

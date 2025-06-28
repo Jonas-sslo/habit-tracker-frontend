@@ -6,7 +6,7 @@ export default function Button({
     color = 'primary',
     size = 'md',
     className = '',
-    disabled=false,
+    disabled = false,
     ...props
 }) {
     const base = 'font-medium rounded-full shadow-sm transition-all focus:outline-none';
@@ -20,33 +20,38 @@ export default function Button({
     const colors = {
         primary: {
             solid: 'bg-[#2549BE] text-white hover:bg-[#1B1B1E] cursor-pointer',
-            outline: 'border border-[#2549BE] text-[#2549BE] hover:bg-[#2549BE] hover:text-white cursor-pointer',
+            outline:
+                'border border-[#2549BE] text-[#2549BE] hover:bg-[#2549BE] hover:text-white cursor-pointer',
             ghost: 'text-[#2549BE] hover:bg-[#2549BE]/10',
-            disabled: 'bg-[#2549BE] text-white opacity-50 cursor-not-allowed'
+            disabled: 'bg-[#2549BE] text-white opacity-50 cursor-not-allowed',
         },
         secondary: {
             solid: 'bg-[#77CBB9] text-white hover:bg-[#60b1a0] cursor-pointer',
-            outline: 'border border-[#77CBB9] text-[#77CBB9] hover:bg-[#77CBB9] hover:text-white cursor-pointer',
+            outline:
+                'border border-[#77CBB9] text-[#77CBB9] hover:bg-[#77CBB9] hover:text-white cursor-pointer',
             ghost: 'text-[#77CBB9] hover:bg-[#77CBB9]/10',
-            disabled: 'bg-[#2549BE] text-white opacity-50 cursor-not-allowed'
+            disabled: 'bg-[#2549BE] text-white opacity-50 cursor-not-allowed',
         },
         danger: {
             solid: 'bg-[#96031A] text-white hover:bg-red-800 cursor-pointer',
-            outline: 'border border-[#96031A] text-[#96031A] hover:bg-[#96031A] hover:text-white cursor-pointer',
+            outline:
+                'border border-[#96031A] text-[#96031A] hover:bg-[#96031A] hover:text-white cursor-pointer',
             ghost: 'text-[#96031A] hover:bg-[#96031A]/10',
-            disabled: 'bg-[#2549BE] text-white opacity-50 cursor-not-allowed'
+            disabled: 'bg-[#2549BE] text-white opacity-50 cursor-not-allowed',
         },
         white: {
             solid: 'bg-white text-black hover:bg-gray-100 cursor-pointer',
-            outline: 'border border-white text-white hover:bg-white hover:text-black cursor-pointer',
+            outline:
+                'border border-white text-white hover:bg-white hover:text-black cursor-pointer',
             ghost: 'text-white hover:bg-white/10',
         },
         gray: {
             solid: 'bg-gray-200 text-black hover:bg-gray-300 cursor-pointer px-8',
-            outline: 'border border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-black cursor-pointer',
+            outline:
+                'border border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-black cursor-pointer',
             ghost: 'text-gray-200 hover:bg-gray-200/10',
-            disabled: 'bg-gray-200 text-black opacity-50 cursor-not-allowed'
-        }
+            disabled: 'bg-gray-200 text-black opacity-50 cursor-not-allowed',
+        },
     };
 
     const selectedStyle = colors[color]?.[variant] || colors.primary.solid;

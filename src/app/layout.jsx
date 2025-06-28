@@ -1,7 +1,14 @@
-'use client';
-
 import './globals.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+
+export const metadata = {
+    title: 'Constantia',
+};
+
+export const viewport = {
+    width: 'device-width',
+    initialScale: 1.0,
+};
 
 export default function RootLayout({ children }) {
     return (

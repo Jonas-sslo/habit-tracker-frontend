@@ -8,11 +8,11 @@ export const validateEmailField = (email, setEmailError) => {
     const isValid = validateEmail(email);
     setEmailError(trimmedEmail && !isValid ? 'Insira um email válido!' : null);
     return isValid;
-}
+};
 
 export const isFormValid = (formData, emailError) => {
     const isEmailValid = formData.email && validateEmail(formData.email);
     const isPasswordValid = formData.password.trim();
     const isNameValid = !('name' in formData) || formData.name?.trim().length > 0;
     return isEmailValid && isPasswordValid && isNameValid && !emailError;
-}
+};
