@@ -12,7 +12,7 @@ export default function LandingPage() {
     const onLogin = () => router.push('/login');
 
     return (
-        <main className="min-h-screen bg-gray-100 scroll-smooth">
+        <main className="min-h-screen light:bg-gray-100 scroll-smooth">
             <NavBar />
             <HeroSection onLogin={onLogin} />
             <FeaturesSection />

@@ -278,6 +278,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Modal para criar ou editar hábito */}
       {showModal && (
         <HabitsForm
           isEditing={isEditing}
