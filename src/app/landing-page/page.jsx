@@ -3,16 +3,17 @@
 import { useRouter } from 'next/navigation';
 import NavBar  from '@/app/components/features/landing-page/NavBar'
 import Image from 'next/image'
-import { AcUnit, BoltOutlined, FilterAltOutlined, Instagram, LinkedIn, ShowChart, Star } from '@mui/icons-material';
+import { BoltOutlined, FilterAltOutlined, Instagram, LinkedIn, ShowChart, Star } from '@mui/icons-material';
 
 export default function LandingPage() {
     const router = useRouter();
+
     const onRegister = () => {
         router.push('/register');
     };
 
     return (
-        <main className='min-h-screen bg-gray-100 scroll-smooth'>
+        <main className='min-h-screen light:bg-gray-100 scroll-smooth'>
             <div className='flex justify-between items-center w-full bg-[#2549BE] fixed'>
                 <NavBar/>
             </div>
@@ -29,7 +30,7 @@ export default function LandingPage() {
                             <br></br>
                             cheque seu histórico e transforme sua jornada.
                         </h1>
-                        <button className="rounded-4xl text-center bg-white w-40 cursor-pointer text-m font-bold p-4" onClick={onRegister}>
+                        <button className="rounded-4xl text-center bg-white w-40 cursor-pointer dark:text-black text-m font-bold p-4" onClick={onRegister}>
                                 Comece Agora
                         </button>
                     </div>

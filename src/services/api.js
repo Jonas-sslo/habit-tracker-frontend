@@ -25,22 +25,4 @@ api.interceptors.request.use(
  * @returns {Promise<Array>}
  */
 
-export async function getHabits() {
-    try {
-        const response = await api.get('/habits/all');
-
-        const habits = response.data.map(habit => ({
-            id: habit.id,
-            nome: habit.name, 
-            frequencia: habit.frequency,
-            diasFeitos: habit.completedDays || []
-        }));
-
-        return habits;
-    } catch (error) {
-        console.error('Erro ao buscar hábitos:', error);
-        return [];
-    }
-}
-
 export default api;

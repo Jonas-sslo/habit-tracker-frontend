@@ -51,7 +51,7 @@ export default function NavBar() {
                                 </button>
                             </li>
                         </ul>
-                        <button className="rounded-xl bg-white w-18 cursor-pointer text-xs font-bold p-1" onClick={goToLogin}>
+                        <button className="rounded-xl bg-white w-18 cursor-pointer dark:text-black text-xs font-bold p-1" onClick={goToLogin}>
                             Entrar
                         </button>
                     </div>

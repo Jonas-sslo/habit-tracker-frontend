@@ -8,8 +8,12 @@ import PasswordInput from '../PasswordInput';
 import Link from 'next/link';
 import { useState } from 'react';
 import { isFormValid, validateEmailField } from '@/app/utils/validators';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
+import { getIcon, getWhiteOrGray600 } from '@/app/utils/theme';
 
 export default function AuthForm({ onSubmit, error, onClearError }) {
+    const { theme } = useTheme();
     const [emailError, setEmailError] = useState(null);
     const [formData, setFormData] = useState({
         email: '',
@@ -27,7 +31,16 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
     return (
         <div className="flex flex-col justify-start w-full h-full p-12">
             <form onSubmit={(e) => onSubmit(e, formData)} className="w-full">
-                <h2 className="text-2xl font-bold mb-14">Constantia</h2>
+                <div className="flex flex-row gap-2 mb-14">
+                    <Image
+                        src={getIcon(theme)}
+                        alt='Logo Constantia'
+                        style={{ objectFit: "contain" }}
+                        width={35}
+                        height={35}
+                    />
+                    <h2 className="text-2xl font-bold">Constantia</h2>
+                </div>
                 <h3 className="text-lg font-bold mb-4">É bom te ver de novo</h3>
                 {error && <div className="mb-4 text-red-600">{error}</div>}
                 <Input 
@@ -62,7 +75,7 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
             />
             <div className="flex flex-col h-full justify-between items-center">
                 <div className="mt-2">
-                    <span className="text-sm text-gray-600">
+                    <span className={`text-sm ${getWhiteOrGray600(theme)}`}>
                         Não tem uma conta?{' '}
                         <Link href="/register" className="text-[#2549BE] hover:underline">
                             Registre-se agora
@@ -70,7 +83,7 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                     </span>
                 </div>
                 <div className="mb-2">
-                    <span className="text-sm text-gray-600">© Constantia 2025</span>
+                    <span className={`text-sm ${getWhiteOrGray600(theme)}`}>© Constantia 2025</span>
                 </div>
             </div>
         </div>

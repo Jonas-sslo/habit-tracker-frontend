@@ -1,0 +1,27 @@
+export const getLogo = (theme) => {
+  return theme === 'dark' ? '/logo-black.png' : '/logo-white.png';
+};
+
+export const getIcon = (theme) => {
+  return theme === 'dark' ? '/logo-icon-white.png' : '/logo-icon-blue.png';
+};
+
+export const getGray300Or600 = (theme) => {
+  return theme === 'dark' ? 'text-gray-300' : 'text-gray-600';
+};
+
+export const getWhiteOrGray700 = (theme) => {
+  return theme === 'dark' ? 'text-white' : 'text-gray-700';
+};
+
+export const getWhiteOrGray600 = (theme) => {
+  return theme === 'dark' ? 'text-white' : 'text-gray-600';
+};
+
+export const getShadow = (theme) => {
+  return theme === 'dark' ? 'shadow-[0_0_10px_2px_rgba(255,255,255,0.8)]' : 'bg-white shadow'
+};
+
+export const getBg = (theme) => {
+  return theme === 'dark' ? 'bg-[#121212]' : 'bg-white'
+};

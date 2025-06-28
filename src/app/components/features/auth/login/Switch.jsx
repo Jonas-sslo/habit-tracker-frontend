@@ -1,9 +1,12 @@
 'use client';
 
+import { getWhiteOrGray700 } from '@/app/utils/theme';
+import { useTheme } from 'next-themes';
 import { useState } from 'react';
 
 export default function Switch({ label = 'Manter conectado', defaultChecked = false, onChange }) {
     const [enabled, setEnabled] = useState(defaultChecked);
+    const { theme } = useTheme();
 
     const toggleSwitch = () => {
         const newValue = !enabled;
@@ -26,7 +29,7 @@ export default function Switch({ label = 'Manter conectado', defaultChecked = fa
                     }`}
                 />
             </button>
-            <label className="text-sm font-medium text-gray-700">{label}</label>
+            <label className={`text-sm font-medium ${getWhiteOrGray700(theme)}`}>{label}</label>
         </div>
     );
 }

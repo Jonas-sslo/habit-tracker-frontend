@@ -11,8 +11,10 @@ export default function Profile() {
   const [userName, setUserName] = useState('Usuário');
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState(null);
-  
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     const avatar = localStorage.getItem('avatar');
     if (avatar) setAvatar(avatar);
     const fetch = async () => {
@@ -27,8 +29,10 @@ export default function Profile() {
     fetch();
   }, []);
 
+  if (!mounted) return null;
+
   return (
-    <div className="flex h-screen bg-[#DBEDFB] overflow-x-hidden">
+    <div className="flex h-screen light:bg-[#DBEDFB] overflow-x-hidden">
       <Sidebar />
       <div className="flex-1 p-4 ml-16 md:ml-20 lg:ml-24">
         <div className="py-6">
@@ -36,7 +40,7 @@ export default function Profile() {
         </div>
 
         <div className="-ml-16 md:-ml-20 lg:-ml-24 -mr-4">
-          <div className="h-px bg-[#2549BE] my-6" />
+          <div className="h-0.5 bg-[#2549BE] my-6" />
         </div>
 
         <div className="flex flex-col items-center mt-8">
