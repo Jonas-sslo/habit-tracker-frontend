@@ -33,8 +33,9 @@ export default function CallToAction({ onLogin }) {
                             versão.
                         </p>
                         <Button
+                            color="yellow"
                             onClick={onLogin}
-                            className="bg-[#FFC857] px-8 sm:px-10 md:px-12 py-4 sm:py-5 transition hover:brightness-110 hover:bg-[#FFC857]"
+                            className="px-8 sm:px-10 md:px-12 py-4 sm:py-5 transition"
                         >
                             <p className="font-semibold text-base sm:text-lg">Comece agora</p>
                         </Button>

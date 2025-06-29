@@ -123,7 +123,7 @@ export default function Home() {
           <p className={`mb-6 ${getGray300Or600(theme)}`}>Constância começa com clareza. Veja seus hábitos de hoje:</p>
 
           <div className="flex flex-wrap gap-3 mb-6">
-            <Button onClick={() => setShowTagModal(true)} className="bg-[#FDC43A] hover:bg-yellow-400 text-white px-4 py-2 rounded-full font-medium flex items-center gap-1">
+            <Button onClick={() => setShowTagModal(true)} color="yellow" className="text-white px-4 py-2 rounded-full font-medium flex items-center gap-1">
               <AddIcon /> Adicionar Tag
             </Button>
 

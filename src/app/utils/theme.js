@@ -25,3 +25,7 @@ export const getShadow = (theme) => {
 export const getBg = (theme) => {
   return theme === 'dark' ? 'bg-[#121212]' : 'bg-white'
 };
+
+export const getGoogleButtonTheme = (theme) => {
+  return theme === 'dark' ? 'filled_black' : 'outline';
+};

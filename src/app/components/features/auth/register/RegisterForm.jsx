@@ -75,7 +75,7 @@ export default function RegisterForm({ onSubmit, error, onClearError, theme }) {
                 <div className="mt-2">
                     <span className={`text-sm ${getWhiteOrGray600}`}>
                         Já tem uma conta?{' '}
-                        <Link href="/login" className="text-[#2549BE] hover:underline">
+                        <Link href="/login" className="text-[#2549BE]">
                             Entre agora
                         </Link>
                     </span>

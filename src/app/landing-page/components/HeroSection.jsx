@@ -40,8 +40,9 @@ export default function HeroSection({ onLogin }) {
 
             <div className="hidden md:flex justify-center mt-12 z-10">
                 <Button
+                    color="black"
                     onClick={onLogin}
-                    className="bg-[#111827] text-white px-4 sm:px-6 py-2 text-xs sm:text-sm flex items-center gap-1"
+                    className="px-4 sm:px-6 py-2 text-xs sm:text-sm flex items-center gap-1"
                 >
                     <Star htmlColor="#FBBF24" fontSize="small" />
                     Experimente a Mudança
