@@ -3,6 +3,7 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
+{ /* TODO: Ajustar problema de modo escuro */ }
 export default function Switch({
     id = 'rememberMe',
     label = 'Manter conectado',
@@ -34,7 +35,7 @@ export default function Switch({
                 onClick={toggleSwitch}
                 type="button"
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none ${
-                    checked ? 'bg-[#2549BE]' : 'bg-gray-300 dark:bg-gray-600'
+                    checked ? 'bg-[#2549BE]' : 'bg-gray-300'
                 }`}
             >
                 <span
@@ -43,7 +44,7 @@ export default function Switch({
                     }`}
                 />
             </button>
-            <label htmlFor={id} className="text-sm font-medium text-gray-700 dark:text-white">
+            <label htmlFor={id} className="text-sm font-medium text-gray-700 ">
                 {label}
             </label>
         </div>

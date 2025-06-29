@@ -14,20 +14,20 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { getIcon, getGoogleButtonTheme } from '@/app/utils/theme';
 
+{ /* TODO: Ajustar problema de modo escuro */ }
 export default function AuthForm({ onSubmit, error, onClearError }) {
-    const { theme } = useTheme();
-    const [isMounted, setIsMounted] = useState(false);
-
     const [emailError, setEmailError] = useState(null);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
         rememberMe: false,
     });
+    const { theme } = useTheme();
+    const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
 
     const handleChange = (e) => {
         const { id, value, type, checked } = e.target;
@@ -43,10 +43,8 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
 
     const isButtonDisabled = !isFormValid(formData, emailError) || error;
 
-    if (!isMounted) return null;
-
     return (
-        <div className="flex flex-col justify-start w-full h-full p-12">
+        <div className="flex flex-col justify-start w-full h-full p-6 md:p-24 lg:p-12">
             <form onSubmit={(e) => onSubmit(e, formData)} className="w-full">
                 <div className="flex flex-row gap-2 mb-14">
                     <Image
@@ -59,7 +57,7 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                     <h2 className="text-2xl font-bold">Constantia</h2>
                 </div>
 
-                <h3 className="text-lg font-bold mb-4">É bom te ver de novo</h3>
+                <h3 className="text-2xl font-semibold mb-4">É bom te ver de novo</h3>
 
                 {error && <div className="mb-4 text-red-600">{error}</div>}
 
@@ -72,6 +70,7 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                     placeholder="Insira o email"
                     required
                 />
+
                 {emailError && <div className="mb-4 text-red-500 text-sm">{emailError}</div>}
 
                 <PasswordInput
@@ -100,14 +99,14 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
             />
 
             <div className="flex flex-col justify-between items-center h-full mt-6">
-                <span className="text-sm text-gray-600 dark:text-gray-300">
+                <span className="text-sm text-gray-600">
                     Não tem uma conta?{' '}
-                    <Link href="/register" className="text-[#2549BE] dark:text-blue-400">
+                    <Link href="/register" className="text-[#2549BE]">
                         Registre-se agora
                     </Link>
                 </span>
 
-                <span className="mt-8 text-sm text-gray-500 dark:text-gray-400">
+                <span className="mt-8 text-sm text-gray-500">
                     © Constantia 2025
                 </span>
             </div>

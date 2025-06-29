@@ -1,5 +1,5 @@
 export const getLogo = (theme) => {
-    return theme === 'dark' ? '/logo-black.png' : '/logo-white.png';
+    return theme === 'dark' ? '/logo-white.png' : '/logo-black.png';
 };
 
 export const getIcon = (theme) => {

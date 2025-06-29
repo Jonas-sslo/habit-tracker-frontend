@@ -33,11 +33,16 @@ export default function Login() {
     };
 
     return (
-        <div className="flex h-screen">
-            <div className="w-4/6 bg-[#2549BE]">
-                <Logo src={getLogo(theme)} fill priority />
+        <div className="flex flex-col lg:flex-row h-screen">
+            <div className="hidden lg:flex lg:w-4/6 bg-[#2549BE] items-center justify-center p-8">
+                <Logo src={getLogo(theme)} fill priority className="w-2/3 h-auto" />
             </div>
-            <div className="w-2/6">
+
+            <div className="w-full h-full lg:w-2/6 flex flex-col items-center justify-center p-6">
+                <div className="block lg:hidden mb-6">
+                    <Logo src={getLogo(theme)} fill priority className="w-24 h-auto" />
+                </div>
+
                 <AuthForm
                     onSubmit={handleSubmit}
                     error={error}
