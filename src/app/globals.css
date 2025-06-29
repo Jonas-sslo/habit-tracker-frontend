@@ -3,7 +3,7 @@
 @import 'react-calendar/dist/Calendar.css';
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {

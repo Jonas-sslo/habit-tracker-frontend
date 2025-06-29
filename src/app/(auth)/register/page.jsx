@@ -15,9 +15,9 @@ export default function Register() {
     const { theme } = useTheme();
 
     useEffect(() => setMounted(true), []);
-    
+
     if (!mounted) return null;
-    
+
     const handleSubmit = async (e, formData) => {
         e.preventDefault();
         try {

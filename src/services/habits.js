@@ -1,11 +1,11 @@
-import api from "./api";
+import api from './api';
 
 export async function getHabits() {
     const response = await api.get('/habits/all');
     return response.data;
 }
 
-export async function createHabit( { name, frequency, description, tag }) {
+export async function createHabit({ name, frequency, description, tag }) {
     const response = await api.post('/habits/create', { name, frequency, description, tag });
     return response.data;
 }

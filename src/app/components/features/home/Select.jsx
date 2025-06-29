@@ -1,12 +1,15 @@
-import { getWhiteOrGray700 } from "@/app/utils/theme";
-import { useTheme } from "next-themes";
+import { getWhiteOrGray700 } from '@/app/utils/theme';
+import { useTheme } from 'next-themes';
 
 export default function Select({ id, label, options, placeholder, ...props }) {
     const { theme } = useTheme();
 
     return (
         <div className="mb-4">
-            <label htmlFor={id} className={`block text-sm font-medium mb-1 ${getWhiteOrGray700(theme)}`}>
+            <label
+                htmlFor={id}
+                className={`block text-sm font-medium mb-1 ${getWhiteOrGray700(theme)}`}
+            >
                 {label}
             </label>
             <select
@@ -20,7 +23,8 @@ export default function Select({ id, label, options, placeholder, ...props }) {
                     <option key={index} value={option.value ?? option}>
                         {option.label ?? option}
                     </option>
-                ))};
+                ))}
+                ;
             </select>
         </div>
     );

@@ -2,11 +2,11 @@ import Input from '../Input';
 import Button from '../../../Button';
 import Divider from '../../../Divider';
 import Link from 'next/link';
-import PasswordInput from "../PasswordInput";
-import { useState } from "react";
-import { isFormValid, validateEmailField } from "@/app/utils/validators";
-import Image from "next/image";
-import { getIcon, getWhiteOrGray600 } from "@/app/utils/theme";
+import PasswordInput from '../PasswordInput';
+import { useState } from 'react';
+import { isFormValid, validateEmailField } from '@/app/utils/validators';
+import Image from 'next/image';
+import { getIcon, getWhiteOrGray600 } from '@/app/utils/theme';
 
 export default function RegisterForm({ onSubmit, error, onClearError, theme }) {
     const [emailError, setEmailError] = useState(null);
@@ -31,7 +31,7 @@ export default function RegisterForm({ onSubmit, error, onClearError, theme }) {
                     <Image
                         src={getIcon(theme)}
                         alt="Logo Constantia"
-                        style={{ objectFit: "contain" }}
+                        style={{ objectFit: 'contain' }}
                         width={35}
                         height={35}
                     />
@@ -81,7 +81,7 @@ export default function RegisterForm({ onSubmit, error, onClearError, theme }) {
                     </span>
                 </div>
                 <div className="mb-2">
-                   <span className={getWhiteOrGray600(theme)}>© Constantia 2025</span>
+                    <span className={getWhiteOrGray600(theme)}>© Constantia 2025</span>
                 </div>
             </div>
         </div>
