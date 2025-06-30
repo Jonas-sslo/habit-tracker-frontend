@@ -9,10 +9,11 @@ import { useState } from 'react';
 import { isFormValid, validateEmailField } from '@/app/utils/validators';
 import Image from 'next/image';
 import { getIcon } from '@/app/utils/theme';
+import { useTheme } from 'next-themes';
 
-{ /* TODO: Ajustar problema de modo escuro */ }
-export default function RegisterForm({ onSubmit, error, onClearError, theme }) {
+export default function RegisterForm({ onSubmit, error, onClearError }) {
     const [emailError, setEmailError] = useState(null);
+    const { theme } = useTheme();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -54,6 +55,7 @@ export default function RegisterForm({ onSubmit, error, onClearError, theme }) {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Nome"
+                    theme={theme}
                     required
                 />
 
@@ -64,6 +66,7 @@ export default function RegisterForm({ onSubmit, error, onClearError, theme }) {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Email"
+                    theme={theme}
                     required
                 />
 
@@ -75,6 +78,7 @@ export default function RegisterForm({ onSubmit, error, onClearError, theme }) {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="Senha"
+                    theme={theme}
                     required
                 />
 
@@ -90,14 +94,14 @@ export default function RegisterForm({ onSubmit, error, onClearError, theme }) {
             <Divider className="my-6" />
 
             <div className="flex flex-col justify-between items-center h-full mt-6 text-center gap-2">
-                <span className="text-sm text-gray-600">
+                <span className="text-sm light:text-gray-600">
                     Já tem uma conta?{' '}
                     <Link href="/login" className="text-[#2549BE]">
                         Entre agora
                     </Link>
                 </span>
 
-                <span className="mt-6 text-sm text-gray-500 ">
+                <span className="mt-6 text-sm light:text-gray-500 ">
                     © Constantia 2025
                 </span>
             </div>

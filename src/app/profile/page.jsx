@@ -6,12 +6,14 @@ import Image from 'next/image';
 import { AccountCircle } from '@mui/icons-material';
 import Input from '../components/features/auth/Input';
 import { getUser } from './actions';
+import { useTheme } from 'next-themes';
 
 export default function Profile() {
     const [userName, setUserName] = useState('Usuário');
     const [email, setEmail] = useState('');
     const [avatar, setAvatar] = useState(null);
     const [mounted, setMounted] = useState(false);
+    const { theme } = useTheme();
 
     useEffect(() => {
         setMounted(true);
@@ -64,8 +66,8 @@ export default function Profile() {
                             )}
                         </div>
                         <div className="flex flex-col gap-4 w-full">
-                            <Input label="Nome" value={userName} readOnly />
-                            <Input label="Email" value={email} readOnly />
+                            <Input label="Nome" value={userName} theme={theme} readOnly />
+                            <Input label="Email" value={email} theme={theme} readOnly />
                         </div>
                     </div>
                 </div>

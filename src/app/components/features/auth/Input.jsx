@@ -1,16 +1,17 @@
-{ /* TODO: Ajustar problema de modo escuro */ }
-export default function Input({ id, label, type = 'text', text, showText, ...props }) {
+import { getGray300Or600, getWhiteOrGray700 } from "@/app/utils/theme";
+
+export default function Input({ id, label, type = 'text', text, showText, theme, ...props }) {
     return (
         <div className="mb-4">
             <label
                 htmlFor={id}
-                className="block text-sm font-medium mb-1 text-gray-700"
+                className={`${getWhiteOrGray700(theme)} block text-sm font-medium mb-1`}
             >
                 {label}
             </label>
 
             {showText && text && (
-                <p className="text-sm text-gray-600 mt-1">{text}</p>
+                <p className={`${getGray300Or600(theme)} text-sm mt-1`}>{text}</p>
             )}
 
             <input

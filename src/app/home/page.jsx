@@ -13,9 +13,14 @@ import TagsModal from '../components/features/home/TagsModal';
 import StreakCard from '../components/features/home/StreakCard';
 import CalendarCard from '../components/features/home/CalendarCard';
 import ActionsButtons from '../components/features/home/ActionsButtons';
+import { getGray300Or600 } from '../utils/theme';
 
 export default function Home() {
     const { theme } = useTheme();
+
+    // TODO 
+    // MUDAR INPUT DO TAGMODAL
+    // E CORES DO BOTAO DE FILTRO
 
     const [mounted, setMounted] = useState(false);
     const [habits, setHabits] = useState([]);
@@ -112,7 +117,7 @@ export default function Home() {
                 {/* Coluna da Esquerda */}
                 <div className="flex-1 pr-6">
                     <h1 className="text-3xl font-semibold mb-1">Olá, {userName}</h1>
-                    <p className={`mb-6 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                    <p className={`mb-6 ${getGray300Or600(theme)}`}>
                         Constância começa com clareza. Veja seus hábitos de hoje:
                     </p>
 
@@ -130,6 +135,7 @@ export default function Home() {
                             filters={filters}
                             setFilters={setFilters}
                             onClose={() => setShowFilterModal(false)}
+                            theme={theme}
                         />
                     )}
 
@@ -145,6 +151,7 @@ export default function Home() {
                                 }
                             }}
                             onClose={() => setShowTagModal(false)}
+                            theme={theme}
                         />
                     )}
 

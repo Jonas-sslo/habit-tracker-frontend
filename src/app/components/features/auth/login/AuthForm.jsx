@@ -12,9 +12,8 @@ import { useState, useEffect } from 'react';
 import { isFormValid, validateEmailField } from '@/app/utils/validators';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import { getIcon, getGoogleButtonTheme } from '@/app/utils/theme';
+import { getIcon, getGoogleButtonTheme, getGray300Or600 } from '@/app/utils/theme';
 
-{ /* TODO: Ajustar problema de modo escuro */ }
 export default function AuthForm({ onSubmit, error, onClearError }) {
     const [emailError, setEmailError] = useState(null);
     const [formData, setFormData] = useState({
@@ -68,6 +67,7 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Insira o email"
+                    theme={theme}
                     required
                 />
 
@@ -79,10 +79,11 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="Insira a senha"
+                    theme={theme}
                     required
                 />
 
-                <Switch id="rememberMe" checked={formData.rememberMe} onChange={handleChange} />
+                <Switch id="rememberMe" checked={formData.rememberMe} onChange={handleChange} theme={theme}/>
 
                 <Button type="submit" className="w-full rounded-md" disabled={isButtonDisabled}>
                     Entrar
@@ -99,14 +100,14 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
             />
 
             <div className="flex flex-col justify-between items-center h-full mt-6">
-                <span className="text-sm text-gray-600">
+                <span className={`${getGray300Or600} text-sm`}>
                     Não tem uma conta?{' '}
                     <Link href="/register" className="text-[#2549BE]">
                         Registre-se agora
                     </Link>
                 </span>
 
-                <span className="mt-8 text-sm text-gray-500">
+                <span className={`${getGray300Or600(theme)} mt-8 text-sm`}>
                     © Constantia 2025
                 </span>
             </div>

@@ -60,6 +60,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                     text="Dê um nome ao hábito que deseja criar"
                     placeholder="Dançar forró"
                     value={newHabit.name || ''}
+                    theme={theme}
                     onChange={handleChange}
                 />
                 <Select
@@ -73,6 +74,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                         { value: 'Yearly', label: 'Anual' },
                     ]}
                     value={newHabit.frequency}
+                    theme={theme}
                     onChange={handleChange}
                 />
                 <Input
@@ -83,6 +85,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                     placeholder="Dançar forró agarradinho com Kauê"
                     label="Descrição"
                     value={newHabit.description || ''}
+                    theme={theme}
                     onChange={handleChange}
                 />
                 <Select
@@ -91,6 +94,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                     placeholder="Selecione uma tag"
                     options={tags}
                     value={newHabit.tag}
+                    theme={theme}
                     onChange={handleChange}
                 />
                 <Button
@@ -101,7 +105,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                 </Button>
                 <button
                     onClick={onClose}
-                    className={`${getGray300Or600(theme)} text-sm underline w-full text-center cursor-pointer`}
+                    className={`${getGray300Or600(theme)} text-sm underline w-full text-center`}
                 >
                     Cancelar
                 </button>

@@ -1,16 +1,15 @@
 'use client';
 
-import { useTheme } from 'next-themes';
+import { getGray300Or600 } from '@/app/utils/theme';
 import { useEffect, useState } from 'react';
 
-{ /* TODO: Ajustar problema de modo escuro */ }
 export default function Switch({
     id = 'rememberMe',
     label = 'Manter conectado',
     checked = false,
     onChange,
+    theme
 }) {
-    const { theme } = useTheme();
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -44,7 +43,7 @@ export default function Switch({
                     }`}
                 />
             </button>
-            <label htmlFor={id} className="text-sm font-medium text-gray-700 ">
+            <label htmlFor={id} className={`${getGray300Or600} text-sm font-medium`}>
                 {label}
             </label>
         </div>

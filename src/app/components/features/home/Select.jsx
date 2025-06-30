@@ -1,8 +1,7 @@
 import { getWhiteOrGray700 } from '@/app/utils/theme';
 import { useTheme } from 'next-themes';
 
-export default function Select({ id, label, options, placeholder, ...props }) {
-    const { theme } = useTheme();
+export default function Select({ id, label, options, placeholder, theme, ...props }) {
 
     return (
         <div className="mb-4">
@@ -16,7 +15,7 @@ export default function Select({ id, label, options, placeholder, ...props }) {
                 id={id}
                 {...props}
                 className="w-full bg-gray-100 border-gray-300 rounded-md px-3 py-3
-                    shadow-xs focus:outline-none focus:ring-2 focus:ring-[#2549BE] dark:text-black"
+                    shadow-xs focus:outline-none focus:ring-2 focus:ring-[#2549BE] text-black"
             >
                 {placeholder && <option value="">{placeholder}</option>}
                 {options.map((option, index) => (
