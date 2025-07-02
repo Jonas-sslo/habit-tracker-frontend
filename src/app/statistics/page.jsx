@@ -51,7 +51,7 @@ export default function StatisticsPage() {
     };
 
     return (
-        <div className="flex">
+        <div className="flex flex-col md:flex-row h-screen bg-gray-100">
             <Sidebar />
             {/* A margem esquerda precisa ser compatível com o width da sidebar */}
             <div className="flex-1 p-6 ml-20">
