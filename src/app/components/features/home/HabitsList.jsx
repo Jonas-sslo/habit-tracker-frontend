@@ -1,5 +1,6 @@
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Edit } from '@mui/icons-material';
+import { Delete } from '@mui/icons-material';
+import { Check } from '@mui/icons-material';
 
 export default function HabitsList({ habits, onEdit, onDelete, filters, applyFilters }) {
     return (
@@ -7,20 +8,23 @@ export default function HabitsList({ habits, onEdit, onDelete, filters, applyFil
             {applyFilters(habits).map((habit) => (
                 <div
                     key={habit.id}
-                    className="flex justify-between items-center bg-white rounded-lg shadow px-4 py-3"
+                    className="flex justify-between items-center bg-white rounded-[18px] shadow-lg px-8 py-4"
                 >
                     <div>
-                        <div className="text-lg font-medium">{habit.name}</div>
+                        <div className="text-md font-medium dark:text-[#1A1A1A]">{habit.name}</div>
                         <div className="text-sm text-gray-500">
                             {habit.frequency} • {habit.tag}
                         </div>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-4">
                         <button onClick={() => onEdit(habit)}>
-                            <EditIcon className="text-gray-500 hover:text-gray-700 cursor-pointer" />
+                            <Edit className="text-[#1E1E1E] hover:text-gray-700 cursor-pointer" />
                         </button>
                         <button onClick={() => onDelete(habit.id)}>
-                            <DeleteIcon className="text-gray-500 hover:text-gray-700 cursor-pointer" />
+                            <Delete className="text-[#1E1E1E] hover:text-gray-700 cursor-pointer" />
+                        </button>
+                        <button onClick={() => onDelete(habit.id)}>
+                            <Check className="text-[#1E1E1E] hover:text-gray-700 cursor-pointer" />
                         </button>
                     </div>
                 </div>

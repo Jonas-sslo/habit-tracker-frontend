@@ -8,7 +8,7 @@ export default function Switch({
     label = 'Manter conectado',
     checked = false,
     onChange,
-    theme
+    theme,
 }) {
     const [isMounted, setIsMounted] = useState(false);
 

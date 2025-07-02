@@ -19,11 +19,15 @@ export const getWhiteOrGray600 = (theme) => {
 };
 
 export const getShadow = (theme) => {
-    return theme === 'dark' ? 'shadow-[0_0_10px_2px_rgba(255,255,255,0.8)]' : 'bg-white shadow';
+    return theme === 'dark' ? 'shadow-[0_0_10px_2px_rgba(255,255,255,0.8)]' : 'shadow-lg';
 };
 
 export const getBg = (theme) => {
     return theme === 'dark' ? 'bg-[#121212]' : 'bg-white';
+};
+
+export const getHomeBg = (theme) => {
+    return theme === 'dark' ? 'bg-[#121212]' : 'bg-[#DBEDFB]';
 };
 
 export const getGoogleButtonTheme = (theme) => {

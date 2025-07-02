@@ -13,7 +13,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
         name: '',
         frequency: '',
         description: '',
-        tag: '',
+        tags: [],
     });
 
     useEffect(() => {

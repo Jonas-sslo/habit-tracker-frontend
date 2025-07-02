@@ -1,4 +1,4 @@
-import { getGray300Or600, getWhiteOrGray700 } from "@/app/utils/theme";
+import { getGray300Or600, getWhiteOrGray700 } from '@/app/utils/theme';
 
 export default function Input({ id, label, type = 'text', text, showText, theme, ...props }) {
     return (
@@ -10,9 +10,7 @@ export default function Input({ id, label, type = 'text', text, showText, theme,
                 {label}
             </label>
 
-            {showText && text && (
-                <p className={`${getGray300Or600(theme)} text-sm mt-1`}>{text}</p>
-            )}
+            {showText && text && <p className={`${getGray300Or600(theme)} text-sm mt-1`}>{text}</p>}
 
             <input
                 id={id}

@@ -19,18 +19,9 @@ export default function Sidebar() {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
-    const onHome = () => {
-        router.push('/home');
-    };
-
-    const onStatistics = () => {
-        router.push('/statistics');
-    };
-
-    const onProfile = () => {
-        router.push('/profile');
-    };
-
+    const onHome = () => router.push('/home');
+    const onStatistics = () => router.push('/statistics');
+    const onProfile = () => router.push('/profile');
     const onLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('avatar');
@@ -52,64 +43,47 @@ export default function Sidebar() {
     if (!mounted) return null;
 
     return (
-        <div className="bg-[#2549BE] text-white h-screen fixed md:w-20 lg:w-22 transition-all duration-300">
-            <nav className="flex flex-col h-full items-center pt-8">
-                <div className="flex flex-col items-center space-y-4">
-                    <button className="p-2 rounded-lg hover:bg-[#1a3a9a]">
-                        <Image
-                            src="/logo-icon-white.png"
-                            alt="Constantia Logo"
-                            style={{ objectFit: 'contain' }}
-                            width={40}
-                            height={40}
-                        />
-                    </button>
-                    <hr className="w-8 border-t" />
-                    <button
-                        onClick={onHome}
-                        className="p-2 rounded-lg hover:bg-[#1a3a9a] cursor-pointer"
-                    >
-                        <HomeOutlined />
-                    </button>
-                    <button
-                        onClick={onStatistics}
-                        className="p-2 rounded-lg hover:bg-[#1a3a9a] cursor-pointer"
-                    >
-                        <ShowChart />
-                    </button>
-                </div>
+        <div className="bg-[#2549BE] text-white h-full flex flex-col items-center justify-between py-4">
+            <div className="flex flex-col items-center space-y-4">
+                <button className="p-2 rounded-lg hover:bg-[#1a3a9a]">
+                    <Image
+                        src="/logo-icon-white.png"
+                        alt="Constantia Logo"
+                        width={40}
+                        height={40}
+                        style={{ objectFit: 'contain' }}
+                    />
+                </button>
+                <hr className="w-8 border-t" />
+                <button onClick={onHome} className="p-2 rounded-lg hover:bg-[#1a3a9a]">
+                    <HomeOutlined />
+                </button>
+                <button onClick={onStatistics} className="p-2 rounded-lg hover:bg-[#1a3a9a]">
+                    <ShowChart />
+                </button>
+            </div>
 
-                <div className="mt-auto flex flex-col items-center space-y-4 pb-8">
-                    <button
-                        onClick={onProfile}
-                        className="p-2 rounded-lg hover:bg-[#1a3a9a] cursor-pointer"
-                    >
-                        {avatar ? (
-                            <Image
-                                src={avatar}
-                                alt="Avatar"
-                                width={36}
-                                height={36}
-                                className="rounded-full"
-                            />
-                        ) : (
-                            <AccountCircleOutlined alt="Avatar" style={{ width: 36, height: 36 }} />
-                        )}
-                    </button>
-                    <button
-                        onClick={toggleTheme}
-                        className="p-2 rounded-lg hover:bg-[#1a3a9a] cursor-pointer"
-                    >
-                        {theme === 'dark' ? <LightModeOutlined /> : <DarkModeOutlined />}
-                    </button>
-                    <button
-                        onClick={onLogout}
-                        className="p-2 rounded-lg hover:bg-[#1a3a9a] cursor-pointer"
-                    >
-                        <ExitToApp />
-                    </button>
-                </div>
-            </nav>
+            <div className="flex flex-col items-center space-y-4">
+                <button onClick={onProfile} className="p-2 rounded-lg hover:bg-[#1a3a9a]">
+                    {avatar ? (
+                        <Image
+                            src={avatar}
+                            alt="Avatar"
+                            width={36}
+                            height={36}
+                            className="rounded-full"
+                        />
+                    ) : (
+                        <AccountCircleOutlined style={{ width: 36, height: 36 }} />
+                    )}
+                </button>
+                <button onClick={toggleTheme} className="p-2 rounded-lg hover:bg-[#1a3a9a]">
+                    {theme === 'dark' ? <LightModeOutlined /> : <DarkModeOutlined />}
+                </button>
+                <button onClick={onLogout} className="p-2 rounded-lg hover:bg-[#1a3a9a]">
+                    <ExitToApp />
+                </button>
+            </div>
         </div>
     );
 }

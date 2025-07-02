@@ -5,15 +5,15 @@ import { isSameDay, parseISO } from 'date-fns';
 
 export default function CalendarCard({ calendarValue, setCalendarValue, habits, theme }) {
     return (
-        <div className={`${getShadow(theme)} rounded-lg p-4`}>
-            <h3 className={`${getGray300Or600(theme)} text-md font-semibold mb-2`}>
+        <div className={'flex flex-col w-full items-center p-4 gap-4'}>
+            <h3 className={`${getGray300Or600(theme)} text-xl text-center font-semibold`}>
                 Seu compromisso de constância
             </h3>
             <Calendar
                 locale="pt-BR"
                 value={calendarValue}
                 onChange={setCalendarValue}
-                className="w-full text-black"
+                className={`${getShadow(theme)} !w-full rounded-lg`}
                 tileClassName={({ date }) =>
                     habits.some((h) =>
                         h.completedDays?.map(parseISO).some((d) => isSameDay(d, date)),

@@ -13,12 +13,12 @@ import TagsModal from '../components/features/home/TagsModal';
 import StreakCard from '../components/features/home/StreakCard';
 import CalendarCard from '../components/features/home/CalendarCard';
 import ActionsButtons from '../components/features/home/ActionsButtons';
-import { getGray300Or600 } from '../utils/theme';
+import { getGray300Or600, getHomeBg } from '../utils/theme';
 
 export default function Home() {
     const { theme } = useTheme();
 
-    // TODO 
+    // TODO
     // MUDAR INPUT DO TAGMODAL
     // E CORES DO BOTAO DE FILTRO
 
@@ -110,72 +110,54 @@ export default function Home() {
     if (!mounted) return null;
 
     return (
-        <div className="flex h-screen light:bg-[#DBEDFB]">
-            <Sidebar />
+        <div className={`flex h-screen ${getHomeBg(theme)}`}>
+            <div className="w-14 md:w-16 lg:w-20 shrink-0">
+                <Sidebar />
+            </div>
 
-            <div className="flex-1 flex p-4 ml-16 md:ml-20 lg:ml-24 overflow-y-auto">
-                {/* Coluna da Esquerda */}
-                <div className="flex-1 pr-6">
-                    <h1 className="text-3xl font-semibold mb-1">Olá, {userName}</h1>
+            <div className="flex-1 flex flex-col overflow-y-auto">
+                <div className="flex flex-col justify-center border-b-[1px] border-b-[#2549BE] px-8 pt-4">
+                    <h1 className="text-4xl font-semibold mb-1">Olá, {userName}</h1>
                     <p className={`mb-6 ${getGray300Or600(theme)}`}>
                         Constância começa com clareza. Veja seus hábitos de hoje:
                     </p>
-
-                    <ActionsButtons
-                        onAddTagClick={() => setShowTagModal(true)}
-                        onAddHabitClick={() => {
-                            setIsEditing(null);
-                            setShowModal(true);
-                        }}
-                        onFilterClick={() => setShowFilterModal(true)}
-                    />
-
-                    {showFilterModal && (
-                        <FiltersModal
-                            filters={filters}
-                            setFilters={setFilters}
-                            onClose={() => setShowFilterModal(false)}
-                            theme={theme}
-                        />
-                    )}
-
-                    {showTagModal && (
-                        <TagsModal
-                            newTag={newTag}
-                            setNewTag={setNewTag}
-                            onAddTag={() => {
-                                if (newTag.trim()) {
-                                    setTags([...tags, newTag.trim()]);
-                                    setNewTag('');
-                                    setShowTagModal(false);
-                                }
-                            }}
-                            onClose={() => setShowTagModal(false)}
-                            theme={theme}
-                        />
-                    )}
-
-                    <HabitsList
-                        habits={habits}
-                        applyFilters={applyFilters}
-                        filters={filters}
-                        onEdit={(habit) => {
-                            setIsEditing(habit);
-                            setShowModal(true);
-                        }}
-                        onDelete={handleDelete}
-                    />
                 </div>
 
-                {/* Coluna da Direita */}
-                <div className="w-full max-w-sm">
-                    <StreakCard activeStreak={activeStreak} theme={theme} />
-                    <CalendarCard
-                        calendarValue={calendarValue}
-                        setCalendarValue={setCalendarValue}
-                        habits={habits}
-                        theme={theme}
-                    />
+                <div className="flex items-center h-full justify-start">
+                    <div className="flex flex-col w-4/6 h-full border-r-[1px] border-r-[#2549BE] px-8 py-6 gap-6">
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-2xl font-semibold">Seus hábitos</h2>
+                            <ActionsButtons
+                                onAddTagClick={() => setShowTagModal(true)}
+                                onAddHabitClick={() => {
+                                    setIsEditing(null);
+                                    setShowModal(true);
+                                }}
+                                onFilterClick={() => setShowFilterModal(true)}
+                            />
+                        </div>
+                        <div className="flex flex-col gap-4 h-full overflow-y-auto py-2">
+                            <HabitsList
+                                habits={habits}
+                                applyFilters={applyFilters}
+                                filters={filters}
+                                onEdit={(habit) => {
+                                    setIsEditing(habit);
+                                    setShowModal(true);
+                                }}
+                                onDelete={handleDelete}
+                            />
+                        </div>
+                    </div>
+                    <div className="w-2/6 flex flex-col gap-6 h-full px-8 py-6">
+                        <StreakCard activeStreak={activeStreak} theme={theme} />
+                        <CalendarCard
+                            calendarValue={calendarValue}
+                            setCalendarValue={setCalendarValue}
+                            habits={habits}
+                            theme={theme}
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -197,6 +179,31 @@ export default function Home() {
                         setShowModal(false);
                     }}
                     tags={tags}
+                />
+            )}
+
+            {showFilterModal && (
+                <FiltersModal
+                    filters={filters}
+                    setFilters={setFilters}
+                    onClose={() => setShowFilterModal(false)}
+                    theme={theme}
+                />
+            )}
+
+            {showTagModal && (
+                <TagsModal
+                    newTag={newTag}
+                    setNewTag={setNewTag}
+                    onAddTag={() => {
+                        if (newTag.trim()) {
+                            setTags([...tags, newTag.trim()]);
+                            setNewTag('');
+                            setShowTagModal(false);
+                        }
+                    }}
+                    onClose={() => setShowTagModal(false)}
+                    theme={theme}
                 />
             )}
         </div>

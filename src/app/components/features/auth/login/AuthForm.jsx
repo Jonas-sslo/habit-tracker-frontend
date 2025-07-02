@@ -83,7 +83,12 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                     required
                 />
 
-                <Switch id="rememberMe" checked={formData.rememberMe} onChange={handleChange} theme={theme}/>
+                <Switch
+                    id="rememberMe"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
+                    theme={theme}
+                />
 
                 <Button type="submit" className="w-full rounded-md" disabled={isButtonDisabled}>
                     Entrar
@@ -107,9 +112,7 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                     </Link>
                 </span>
 
-                <span className={`${getGray300Or600(theme)} mt-8 text-sm`}>
-                    © Constantia 2025
-                </span>
+                <span className={`${getGray300Or600(theme)} mt-8 text-sm`}>© Constantia 2025</span>
             </div>
         </div>
     );

@@ -101,9 +101,7 @@ export default function RegisterForm({ onSubmit, error, onClearError }) {
                     </Link>
                 </span>
 
-                <span className="mt-6 text-sm light:text-gray-500 ">
-                    © Constantia 2025
-                </span>
+                <span className="mt-6 text-sm light:text-gray-500 ">© Constantia 2025</span>
             </div>
         </div>
     );

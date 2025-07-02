@@ -1,19 +1,21 @@
-import { getBg, getGray300Or600 } from "@/app/utils/theme";
-import Button from "../../Button";
+import { getBg, getGray300Or600 } from '@/app/utils/theme';
+import Button from '../../Button';
 
 export default function FiltersModal({ filters, setFilters, onClose, theme }) {
     const frequencies = ['Diário', 'Semanal', 'Mensal', 'Anual'];
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-            <div className={`${getBg(theme)} rounded-2xl shadow-lg p-6 w-[90%] max-w-md border-2 border-[#2549BE]`}>
+            <div
+                className={`${getBg(theme)} rounded-2xl shadow-lg p-6 w-[90%] max-w-md border-2 border-[#2549BE]`}
+            >
                 <h2 className="text-center text-lg font-semibold mb-4">Filtrar Hábitos</h2>
 
                 <div className="mb-4">
                     <p className="font-medium mb-1">Status</p>
                     <div className="flex gap-2 flex-wrap">
                         <Button
-                            onClick={() => setFilters({ ...filters, status: 'concluded' })} 
+                            onClick={() => setFilters({ ...filters, status: 'concluded' })}
                             className={`px-3 py-1 text-black rounded-md ${filters.status === 'concluded' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                         >
                             Concluído

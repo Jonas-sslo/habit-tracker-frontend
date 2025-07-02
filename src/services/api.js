@@ -20,9 +20,4 @@ api.interceptors.request.use(
     },
 );
 
-/**
-
- * @returns {Promise<Array>}
- */
-
 export default api;
