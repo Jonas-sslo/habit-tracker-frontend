@@ -4,7 +4,7 @@ import Input from '../Input';
 import Button from '../../../Button';
 import Switch from './Switch';
 import Divider from '../../../Divider';
-import { handleGoogleLogin, handleGoogleLoginError } from '@/app/(auth)/login/actions';
+import { loginWithGoogleToken } from '@/services/auth';
 import { GoogleLogin } from '@react-oauth/google';
 import PasswordInput from '../PasswordInput';
 import Link from 'next/link';
@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import { isFormValid, validateEmailField } from '@/app/utils/validators';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
+import { useRouter } from 'next/navigation';
 import { getIcon, getGoogleButtonTheme, getGray300Or600 } from '@/app/utils/theme';
 
 export default function AuthForm({ onSubmit, error, onClearError }) {
@@ -22,6 +23,7 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
         rememberMe: false,
     });
     const { theme } = useTheme();
+    const router = useRouter();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => setMounted(true), []);
@@ -39,6 +41,28 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
         if (id === 'email') validateEmailField(value, setEmailError);
         if (error && onClearError) onClearError();
     };
+
+    const handleGoogleLogin = async (credentialResponse) => {
+        const token = credentialResponse?.credential;
+
+        if (!token) throw new Error('Token do Google inválido');
+
+        const data = await loginWithGoogleToken(token);
+
+        console.log('Dados recebidos do Google:', data);
+
+        if (!data?.token) throw new Error('Token não recebido do Google');
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.name));
+        localStorage.setItem('avatar', data.avatar || '');
+        localStorage.setItem('userId', data.userId);
+        router.push('/home');
+    }
+
+    const handleGoogleLoginError = () => {
+        console.error('Falha no login com o Google');
+    }
 
     const isButtonDisabled = !isFormValid(formData, emailError) || error;
 
