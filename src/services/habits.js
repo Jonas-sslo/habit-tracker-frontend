@@ -13,7 +13,12 @@ export async function createHabit({ name, frequency, description, tag }) {
 }
 
 export async function updateHabit(id, { name, frequency, description, tag }) {
-    const response = await api.put(`${BASE_URL}/update/${id}`, { name, frequency, description, tag });
+    const response = await api.put(`${BASE_URL}/update/${id}`, {
+        name,
+        frequency,
+        description,
+        tag,
+    });
     return response.data;
 }
 

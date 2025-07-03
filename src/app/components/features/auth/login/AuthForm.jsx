@@ -58,11 +58,11 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
         localStorage.setItem('avatar', data.avatar || '');
         localStorage.setItem('userId', data.userId);
         router.push('/home');
-    }
+    };
 
     const handleGoogleLoginError = () => {
         console.error('Falha no login com o Google');
-    }
+    };
 
     const isButtonDisabled = !isFormValid(formData, emailError) || error;
 
