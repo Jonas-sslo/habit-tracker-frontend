@@ -7,17 +7,22 @@ export async function getHabits() {
     return response.data;
 }
 
-export async function createHabit({ name, frequency, description, tag }) {
-    const response = await api.post(`${BASE_URL}`, { name, frequency, description, tag });
+export async function createHabit({ name, frequency, description, tags }) {
+    const response = await api.post(`${BASE_URL}`, { 
+        name, 
+        frequency, 
+        description, 
+        tags: Array.isArray(tags) ? tags : [tags] 
+    });
     return response.data;
 }
 
-export async function updateHabit(id, { name, frequency, description, tag }) {
+export async function updateHabit(id, { name, frequency, description, tags }) {
     const response = await api.put(`${BASE_URL}/update/${id}`, {
         name,
         frequency,
         description,
-        tag,
+        tags: Array.isArray(tags) ? tags : [tags],
     });
     return response.data;
 }
