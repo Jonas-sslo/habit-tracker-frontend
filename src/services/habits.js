@@ -8,11 +8,11 @@ export async function getHabits() {
 }
 
 export async function createHabit({ name, frequency, description, tags }) {
-    const response = await api.post(`${BASE_URL}`, { 
-        name, 
-        frequency, 
-        description, 
-        tags: Array.isArray(tags) ? tags : [tags] 
+    const response = await api.post(`${BASE_URL}`, {
+        name,
+        frequency,
+        description,
+        tags: Array.isArray(tags) ? tags : [tags],
     });
     return response.data;
 }

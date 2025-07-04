@@ -15,6 +15,8 @@ import ActionsButtons from '../components/features/home/ActionsButtons';
 import { getGray300Or600, getHomeBg } from '../utils/theme';
 import Layout from '../components/Layout';
 import { createTag, getTags } from '@/services/tags';
+import { on } from 'events';
+import DeleteConfirmationModal from '../components/features/home/DeleteConfirmationModal';
 
 export default function Home() {
     const { theme } = useTheme();
@@ -24,18 +26,24 @@ export default function Home() {
     const [userName, setUserName] = useState('Usuário');
     const [calendarValue, setCalendarValue] = useState(new Date());
     const [activeStreak, setActiveStreak] = useState(0);
-    const [showModal, setShowModal] = useState(false);
-    const [showTagModal, setShowTagModal] = useState(false);
     const [newTag, setNewTag] = useState('');
     const [tags, setTags] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [showFilterModal, setShowFilterModal] = useState(false);
+    const [showTagModal, setShowTagModal] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [filters, setFilters] = useState(
-        { status: 'concluded', 
+        { status: 'notConcluded', 
           order: 'alphabetical', 
           frequency: 'daily' 
         }
     );
-    const [showFilterModal, setShowFilterModal] = useState(false);
+    const [currentFilters, setCurrentFilters] = useState(filters);
+    const [deleteModal, setDeleteModal] = useState({
+        isOpen: false,
+        habitId: null,
+        onConfirm: null,
+    });
     const today = new Date();
 
     useEffect(() => {
@@ -68,7 +76,8 @@ export default function Home() {
         if (!newTag.trim()) return;
         try {
             await createTag(newTag.trim());
-            setTags(prev => [...prev, newTag.trim()]);
+            const createdTags = await getTags();
+            setTags(createdTags);
             setNewTag('');
             setShowTagModal(false);
         } catch (error) {
@@ -97,23 +106,23 @@ export default function Home() {
     const applyFilters = (habits) => {
         return habits
             .filter((h) => {
-                if (filters.status === 'concluded') {
+                if (currentFilters.status === 'concluded') {
                     return h.concludedDays?.some((d) => isSameDay(parseISO(d), today));
                 }
-                if (filters.status === 'notConcluded') {
+                if (currentFilters.status === 'notConcluded') {
                     return !h.concludedDays?.some((d) => isSameDay(parseISO(d), today));
                 }
                 return true;
             })
             .filter((h) => {
-                if (!filters.frequency) return true;
-                return h.frequency === filters.frequency;
+                if (!currentFilters.frequency) return true;
+                return h.frequency === currentFilters.frequency;
             })
             .sort((a, b) => {
-                if (filters.order === 'alphabetical') {
+                if (currentFilters.order === 'alphabetical') {
                     return a.name.localeCompare(b.name);
                 }
-                if (filters.order === 'duration') {
+                if (currentFilters.order === 'duration') {
                     return (b.concludedDays?.length || 0) - (a.concludedDays?.length || 0);
                 }
                 return 0;
@@ -121,14 +130,19 @@ export default function Home() {
     };
 
     const handleDelete = async (id) => {
-        try {
-            alert('Você tem certeza que deseja excluir este hábito?');
-            if (!window.confirm('Você tem certeza que deseja excluir este hábito?')) return; // melhorar mensagem
+      setDeleteModal({
+        isOpen: true,
+        habitId: id,
+        onConfirm: async () => {
+          try {
             await deleteHabit(id);
             setHabits((prev) => prev.filter((h) => h.id !== id));
-        } catch (error) {
-            console.error('Erro ao excluir hábito: ', error);
-        }
+            setDeleteModal({ isOpen: false, habitId: null, onConfirm: null });
+          } catch (error) {
+            console.error('Erro ao excluir hábito:', error);
+          } 
+        },
+      })
     };
 
     if (!mounted) return null;
@@ -189,14 +203,14 @@ export default function Home() {
                             setShowModal(false);
                             setIsEditing(null);
                         }}
-                        onAdd={(h) => {
-                            setHabits((prev) => [...prev, h]);
+                        onAdd={async () => {
+                            const createdHabits = await getHabits();
+                            setHabits(createdHabits);
                             setShowModal(false);
                         }}
-                        onEdit={(updatedHabit) => {
-                            setHabits((prev) =>
-                                prev.map((h) => (h.id === updatedHabit.id ? updatedHabit : h)),
-                            );
+                        onEdit={async () => {
+                            const updatedHabits = await getHabits();
+                            setHabits(updatedHabits);
                             setShowModal(false);
                         }}
                         tags={tags.map(t => ({ value: t.name, label: t.name }))}
@@ -207,6 +221,10 @@ export default function Home() {
                     <FiltersModal
                         filters={filters}
                         setFilters={setFilters}
+                        onApply={() => {
+                            setCurrentFilters(filters);
+                            setShowFilterModal(false);
+                        }}
                         onClose={() => setShowFilterModal(false)}
                         theme={theme}
                     />
@@ -219,6 +237,14 @@ export default function Home() {
                         onAddTag={handleAddTag}
                         onClose={() => setShowTagModal(false)}
                         theme={theme}
+                    />
+                )}
+
+                {deleteModal.isOpen && (
+                    <DeleteConfirmationModal
+                        isOpen={deleteModal.isOpen}
+                        onClose={() => setDeleteModal({ isOpen: false, habitId: null, onConfirm: null })}
+                        onConfirm={deleteModal.onConfirm}
                     />
                 )}
             </div>

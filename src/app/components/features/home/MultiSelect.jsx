@@ -52,7 +52,8 @@ export function MultiSelect({ id, label, placeholder, options, value, onChange, 
 
             {isOpen && (
                 <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md">
-                    {options.map(option => (
+                    <div className="max-h-60 overflow-y-auto">
+                        {options.map(option => (
                         <div 
                             key={option.value}
                             className={`px-3 py-2 hover:bg-gray-100 text-black
@@ -68,6 +69,7 @@ export function MultiSelect({ id, label, placeholder, options, value, onChange, 
                             {option.label}
                         </div>
                     ))}
+                    </div>
                 </div>
             )}
         </div>

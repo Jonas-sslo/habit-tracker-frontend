@@ -1,7 +1,7 @@
 import { getBg, getGray300Or600, getWhiteOrGray700 } from '@/app/utils/theme';
 import Button from '../../Button';
 
-export default function FiltersModal({ filters, setFilters, onClose, theme }) {
+export default function FiltersModal({ filters, setFilters, onApply, onClose, theme }) {
     const frequencies = {
       daily: 'Diário',
       weekly: 'Semanal',
@@ -68,7 +68,7 @@ export default function FiltersModal({ filters, setFilters, onClose, theme }) {
                 </div>
 
                 <Button
-                    onClick={onClose}
+                    onClick={onApply}
                     className="bg-[#2549BE] hover:bg-blue-800 text-white w-full py-2 rounded-md font-semibold mb-2"
                 >
                     Aplicar filtros

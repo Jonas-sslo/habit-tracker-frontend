@@ -36,4 +36,4 @@ export const getGoogleButtonTheme = (theme) => {
 
 export const getGray300OrLightGray = (theme) => {
     return theme === 'dark' ? 'text-gray-300' : 'text-[#1A1A1A]';
-}
+};
