@@ -33,3 +33,7 @@ export const getHomeBg = (theme) => {
 export const getGoogleButtonTheme = (theme) => {
     return theme === 'dark' ? 'filled_black' : 'outline';
 };
+
+export const getGray300OrLightGray = (theme) => {
+    return theme === 'dark' ? 'text-gray-300' : 'text-[#1A1A1A]';
+}

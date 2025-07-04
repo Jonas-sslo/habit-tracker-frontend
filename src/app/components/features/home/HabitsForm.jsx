@@ -26,8 +26,6 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
         setNewHabit((prev) => ({ ...prev, [id]: value }));
     };
 
-    // TODO
-    // MELHORAR MENSAGEM DE ERRO
     const handleSubmit = async () => {
         try {
             if (isEditing) {
@@ -43,6 +41,8 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
             console.error(errorMessage, error);
         }
     };
+
+    const isButtonDisabled = !newHabit.name || !newHabit.frequency || !newHabit.tag;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -68,10 +68,10 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                     label="Frequência"
                     placeholder="Selecione uma frequência"
                     options={[
-                        { value: 'Daily', label: 'Diário' },
-                        { value: 'Weekly', label: 'Semanal' },
-                        { value: 'Monthly', label: 'Mensal' },
-                        { value: 'Yearly', label: 'Anual' },
+                        { value: 'daily', label: 'Diário' },
+                        { value: 'weekly', label: 'Semanal' },
+                        { value: 'monthly', label: 'Mensal' },
+                        { value: 'yearly', label: 'Anual' },
                     ]}
                     value={newHabit.frequency}
                     theme={theme}
@@ -100,6 +100,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                 <Button
                     onClick={handleSubmit}
                     className="bg-[#2549BE] hover:bg-blue-800 text-white w-full rounded-md py-2 font-semibold mb-2"
+                    disabled={isButtonDisabled}
                 >
                     {isEditing ? 'Salvar Alterações' : 'Adicionar'}
                 </Button>

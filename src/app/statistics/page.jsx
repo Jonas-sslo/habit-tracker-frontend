@@ -1,22 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
+import { getHomeBg } from '../utils/theme';
+import { useTheme } from 'next-themes';
 
 export default function StatisticsPage() {
+    const { theme } = useTheme();
     const [filters, setFilters] = useState({
         tags: '',
         frequency: '',
         startDate: '',
         endDate: '',
     });
-
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const token = localStorage.getItem('token');
+    const [token, setToken] = useState('');
+
+    useEffect(() => { setToken(localStorage.getItem('token') || '') }, []);
 
     const handleChange = (e) => {
         setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -52,7 +56,7 @@ export default function StatisticsPage() {
 
     return (
         <Layout>
-            <div className="flex flex-col md:flex-row h-screen bg-gray-100">
+            <div className={`${getHomeBg(theme)} flex flex-col md:flex-row h-screen`}>
                 {/* A margem esquerda precisa ser compatível com o width da sidebar */}
                 <div className="flex-1 p-6 ml-20">
                     <h1 className="text-3xl font-bold mb-6">Estátistica do Usuário</h1>
