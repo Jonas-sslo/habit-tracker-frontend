@@ -1,8 +1,13 @@
-import { getBg, getGray300Or600 } from '@/app/utils/theme';
+import { getBg, getGray300Or600, getWhiteOrGray700 } from '@/app/utils/theme';
 import Button from '../../Button';
 
 export default function FiltersModal({ filters, setFilters, onClose, theme }) {
-    const frequencies = ['Diário', 'Semanal', 'Mensal', 'Anual'];
+    const frequencies = {
+      daily: 'Diário',
+      weekly: 'Semanal',
+      monthly: 'Mensal',
+      yearly: 'Anual'
+    };
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -12,17 +17,17 @@ export default function FiltersModal({ filters, setFilters, onClose, theme }) {
                 <h2 className="text-center text-lg font-semibold mb-4">Filtrar Hábitos</h2>
 
                 <div className="mb-4">
-                    <p className="font-medium mb-1">Status</p>
+                    <p className={`${getWhiteOrGray700(theme)} font-medium mb-1`}>Status</p>
                     <div className="flex gap-2 flex-wrap">
                         <Button
                             onClick={() => setFilters({ ...filters, status: 'concluded' })}
-                            className={`px-3 py-1 text-black rounded-md ${filters.status === 'concluded' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                            className={`px-3 py-1 text-black rounded-md ${filters.status === 'concluded' ? 'text-white' : '!bg-gray-200'}`}
                         >
                             Concluído
                         </Button>
                         <Button
                             onClick={() => setFilters({ ...filters, status: 'notConcluded' })}
-                            className={`px-3 py-1 rounded-md ${filters.status === 'notConcluded' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                            className={`px-3 py-1 rounded-md ${filters.status === 'notConcluded' ? 'text-white' : '!bg-gray-200'}`}
                         >
                             Não concluído
                         </Button>
@@ -30,17 +35,17 @@ export default function FiltersModal({ filters, setFilters, onClose, theme }) {
                 </div>
 
                 <div className="mb-4">
-                    <p className="font-medium mb-1">Order</p>
+                    <p className={`${getWhiteOrGray700(theme)} font-medium mb-1`}>Ordem</p>
                     <div className="flex gap-2 flex-wrap">
                         <Button
                             onClick={() => setFilters({ ...filters, order: 'alphabetical' })}
-                            className={`px-3 py-1 rounded-md ${filters.order === 'alphabetical' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                            className={`px-3 py-1 rounded-md ${filters.order === 'alphabetical' ? 'text-white' : '!bg-gray-200'}`}
                         >
                             Alfabética
                         </Button>
                         <Button
                             onClick={() => setFilters({ ...filters, order: 'duration' })}
-                            className={`px-3 py-1 rounded-md ${filters.order === 'duration' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                            className={`px-3 py-1 rounded-md ${filters.order === 'duration' ? 'text-white' : '!bg-gray-200'}`}
                         >
                             Duração
                         </Button>
@@ -48,15 +53,15 @@ export default function FiltersModal({ filters, setFilters, onClose, theme }) {
                 </div>
 
                 <div className="mb-6">
-                    <p className="font-medium mb-1">Frequência</p>
+                    <p className={`${getWhiteOrGray700(theme)} font-medium mb-1`}>Frequência</p>
                     <div className="flex gap-2 flex-wrap">
-                        {frequencies.map((f) => (
+                        {Object.entries(frequencies).map(([value, label]) => (
                             <Button
-                                key={f}
-                                onClick={() => setFilters({ ...filters, frequency: f })}
-                                className={`px-3 py-1 rounded-md ${filters.frequency === f ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                                key={value}
+                                onClick={() => setFilters({ ...filters, frequency: value })}
+                                className={`px-3 py-1 rounded-md ${filters.frequency === value ? 'text-white' : '!bg-gray-200'}`}
                             >
-                                {f}
+                                {label}
                             </Button>
                         ))}
                     </div>

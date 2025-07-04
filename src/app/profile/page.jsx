@@ -9,13 +9,14 @@ import { getUser } from './actions';
 import { useTheme } from 'next-themes';
 import Layout from '../components/Layout';
 import Divider from '../components/Divider';
+import { getHomeBg } from '../utils/theme';
 
 export default function Profile() {
+    const { theme } = useTheme();
     const [userName, setUserName] = useState('Usuário');
     const [email, setEmail] = useState('');
     const [avatar, setAvatar] = useState(null);
     const [mounted, setMounted] = useState(false);
-    const { theme } = useTheme();
 
     useEffect(() => {
         setMounted(true);
@@ -37,7 +38,7 @@ export default function Profile() {
 
     return (
         <Layout>
-            <div className="flex flex-col md:flex-row h-auto min-h-screen light:bg-[#DBEDFB] overflow-x-hidden">
+            <div className={`${getHomeBg(theme)} flex flex-col md:flex-row h-auto min-h-screen overflow-x-hidden`}>
                 <div className="flex-1">
                     <div className="py-6 text-center md:text-left p-4">
                         <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold">
@@ -62,7 +63,7 @@ export default function Profile() {
                                     />
                                 ) : (
                                     <AccountCircle
-                                        className="text-gray-400 w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72"
+                                        className="text-gray-400 !w-48 !h-48 sm:!w-60 sm:!h-60 md:!w-72 md:!h-72"
                                     />
                                 )}
                             </div>

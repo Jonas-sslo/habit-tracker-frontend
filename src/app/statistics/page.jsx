@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
@@ -8,27 +8,20 @@ import fileDownload from 'js-file-download';
 import Layout from '../components/Layout';
 import Sidebar from '../components/Sidebar'; 
 import Button from '../components/Button';
+import { getHomeBg } from '../utils/theme';
+import { useTheme } from 'next-themes';
 
 export default function StatisticsPage() {
-  const [filters, setFilters] = useState({
-    tags: '',
-    frequency: '',
-    startDate: '',
-    endDate: '',
-  });
+    const [filters, setFilters] = useState({
+        tags: '',
+        frequency: '',
+        startDate: '',
+        endDate: '',
+    });
 
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [token, setToken] = useState('');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedToken = localStorage.getItem('token');
-      if (storedToken) {
-        setToken(storedToken);
-      }
-    }
-  }, []);
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const token = localStorage.getItem('token');
 
   const handleChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -103,11 +96,12 @@ export default function StatisticsPage() {
   };
   
 
-  return (
-    <div className="flex">
-      <Sidebar />
-      <div className="flex-1 p-6 ml-20">
-        <h1 className="text-3xl font-bold mb-6">Estátistica do Usuário</h1>
+    return (
+        <Layout>
+            <div className="flex flex-col md:flex-row h-screen bg-gray-100">
+                {/* A margem esquerda precisa ser compatível com o width da sidebar */}
+                <div className="flex-1 p-6 ml-20">
+                    <h1 className="text-3xl font-bold mb-6">Estátistica do Usuário</h1>
 
         {/* filtros */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -184,5 +178,6 @@ export default function StatisticsPage() {
         )}
       </div>
     </div>
+    </Layout> 
   );
 }

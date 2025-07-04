@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import HabitsForm from '../components/features/home/HabitsForm';
 import { deleteHabit, getHabits } from '../../services/habits';
-import { format, isSameDay, parseISO, subDays } from 'date-fns';
+import { format, isSameDay, parseISO, set, subDays } from 'date-fns';
 import { useTheme } from 'next-themes';
 
 import HabitsList from '../components/features/home/HabitsList';
@@ -14,16 +14,10 @@ import StreakCard from '../components/features/home/StreakCard';
 import CalendarCard from '../components/features/home/CalendarCard';
 import ActionsButtons from '../components/features/home/ActionsButtons';
 import { getGray300Or600, getHomeBg } from '../utils/theme';
-import { MenuOutlined } from '@mui/icons-material';
 import Layout from '../components/Layout';
 
 export default function Home() {
     const { theme } = useTheme();
-
-    // TODO
-    // MUDAR INPUT DO TAGMODAL
-    // E CORES DO BOTAO DE FILTRO
-
     const [mounted, setMounted] = useState(false);
     const [habits, setHabits] = useState([]);
     const [isEditing, setIsEditing] = useState(null);
@@ -35,9 +29,13 @@ export default function Home() {
     const [newTag, setNewTag] = useState('');
     const [tags, setTags] = useState([]);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [filters, setFilters] = useState({ status: '', order: '', frequency: '' });
+    const [filters, setFilters] = useState(
+        { status: 'concluded', 
+          order: 'alphabetical', 
+          frequency: 'daily' 
+        }
+    );
     const [showFilterModal, setShowFilterModal] = useState(false);
-
     const today = new Date();
 
     useEffect(() => {

@@ -1,5 +1,4 @@
 import { getWhiteOrGray700 } from '@/app/utils/theme';
-import { useTheme } from 'next-themes';
 
 export default function Select({ id, label, options, placeholder, theme, ...props }) {
     return (
