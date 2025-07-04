@@ -5,6 +5,7 @@ import Button from '../../Button';
 import { useEffect, useState } from 'react';
 import Select from './Select';
 import { createHabit, updateHabit } from '@/services/habits';
+import { MultiSelect } from './MultiSelect';
 
 export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) {
     const { theme } = useTheme();
@@ -17,8 +18,15 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
     });
 
     useEffect(() => {
-        if (isEditing) setNewHabit(isEditing);
-        else setNewHabit({ name: '', frequency: '', description: '', tag: '' });
+        if (isEditing) {
+            const editingHabit = {
+                ...isEditing,
+                tags: Array.isArray(isEditing.tags)
+                    ? isEditing.tags.map(t => t.name)
+                    : [],
+            };
+            setNewHabit(editingHabit);
+        } else setNewHabit({ name: '', frequency: '', description: '', tags: [] });
     }, [isEditing]);
 
     const handleChange = (e) => {
@@ -26,13 +34,19 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
         setNewHabit((prev) => ({ ...prev, [id]: value }));
     };
 
+    const handleTagsChange = (selectedTags) => {
+        setNewHabit(prev => ({ ...prev, tags: selectedTags }));
+    };
+
+
     const handleSubmit = async () => {
         try {
+            const habitData = {...newHabit, tags: newHabit.tags};
             if (isEditing) {
-                const updatedHabit = await updateHabit(isEditing.id, newHabit);
+                const updatedHabit = await updateHabit(isEditing.id, habitData);
                 onEdit(updatedHabit);
             } else {
-                const createdHabit = await createHabit(newHabit);
+                const createdHabit = await createHabit(habitData);
                 onAdd(createdHabit);
             }
             onClose();
@@ -42,7 +56,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
         }
     };
 
-    const isButtonDisabled = !newHabit.name || !newHabit.frequency || !newHabit.tag;
+    const isButtonDisabled = !newHabit.name || !newHabit.frequency || newHabit.tags.length === 0;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -88,14 +102,14 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                     theme={theme}
                     onChange={handleChange}
                 />
-                <Select
+                <MultiSelect
                     id="tag"
                     label="Tags"
                     placeholder="Selecione uma tag"
                     options={tags}
-                    value={newHabit.tag}
+                    value={newHabit.tags}
+                    onChange={handleTagsChange}
                     theme={theme}
-                    onChange={handleChange}
                 />
                 <Button
                     onClick={handleSubmit}

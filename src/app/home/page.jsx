@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Sidebar from '../components/Sidebar';
 import HabitsForm from '../components/features/home/HabitsForm';
 import { deleteHabit, getHabits } from '../../services/habits';
 import { format, isSameDay, parseISO, set, subDays } from 'date-fns';
@@ -15,6 +14,7 @@ import CalendarCard from '../components/features/home/CalendarCard';
 import ActionsButtons from '../components/features/home/ActionsButtons';
 import { getGray300Or600, getHomeBg } from '../utils/theme';
 import Layout from '../components/Layout';
+import { createTag, getTags } from '@/services/tags';
 
 export default function Home() {
     const { theme } = useTheme();
@@ -45,15 +45,36 @@ export default function Home() {
 
         async function fetchHabits() {
             try {
-                const data = await getHabits();
-                setHabits(data);
-                calculateSequency(data);
+                const habitsData = await getHabits();
+                setHabits(habitsData);
+                calculateSequency(habitsData);
             } catch (error) {
                 console.error('Erro ao buscar hábitos:', error);
+            };
+        };
+        async function fetchTags() {
+            try {
+                const tagsData = await getTags();
+                setTags(tagsData);
+            } catch (error) {
+                console.error('Erro ao buscar tags:', error);
             }
         }
         fetchHabits();
+        fetchTags();
     }, []);
+
+    const handleAddTag = async () => {
+        if (!newTag.trim()) return;
+        try {
+            await createTag(newTag.trim());
+            setTags(prev => [...prev, newTag.trim()]);
+            setNewTag('');
+            setShowTagModal(false);
+        } catch (error) {
+            console.error('Erro ao adicionar tag:', error);
+        };
+    };
 
     const calculateSequency = (habits) => {
         const concludedDays = new Set();
@@ -101,6 +122,8 @@ export default function Home() {
 
     const handleDelete = async (id) => {
         try {
+            alert('Você tem certeza que deseja excluir este hábito?');
+            if (!window.confirm('Você tem certeza que deseja excluir este hábito?')) return; // melhorar mensagem
             await deleteHabit(id);
             setHabits((prev) => prev.filter((h) => h.id !== id));
         } catch (error) {
@@ -176,7 +199,7 @@ export default function Home() {
                             );
                             setShowModal(false);
                         }}
-                        tags={tags}
+                        tags={tags.map(t => ({ value: t.name, label: t.name }))}
                     />
                 )}
 
@@ -193,13 +216,7 @@ export default function Home() {
                     <TagsModal
                         newTag={newTag}
                         setNewTag={setNewTag}
-                        onAddTag={() => {
-                            if (newTag.trim()) {
-                                setTags([...tags, newTag.trim()]);
-                                setNewTag('');
-                                setShowTagModal(false);
-                            }
-                        }}
+                        onAddTag={handleAddTag}
                         onClose={() => setShowTagModal(false)}
                         theme={theme}
                     />

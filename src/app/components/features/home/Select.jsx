@@ -12,7 +12,7 @@ export default function Select({ id, label, options, placeholder, theme, ...prop
             <select
                 id={id}
                 {...props}
-                className="w-full bg-gray-100 border-gray-300 rounded-md px-3 py-3
+                className="w-full bg-gray-100 border border-gray-300 rounded-md px-3 py-3
                     shadow-xs focus:outline-none focus:ring-2 focus:ring-[#2549BE] text-black"
             >
                 {placeholder && <option value="">{placeholder}</option>}

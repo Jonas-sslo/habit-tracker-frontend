@@ -23,10 +23,10 @@ export default function HabitsList({ habits, onEdit, onDelete, filters, applyFil
                             <Edit className="text-[#1E1E1E] hover:text-gray-700 cursor-pointer !text-[22px]" />
                         </button>
                         <button onClick={() => onDelete(habit.id)}>
-                            <Delete className="text-[#1E1E1E] hover:text-gray-700 cursor-pointer !text-[22px]" />
+                            <Delete className="text-[#96031A] hover:text-[#C12F40] cursor-pointer !text-[22px]" />
                         </button>
                         <button onClick={() => onDelete(habit.id)}>
-                            <Check className="text-[#1E1E1E] hover:text-gray-700 cursor-pointer !text-[22px]" />
+                            <Check className="text-[#48998B] hover:text-[#77CBB9] cursor-pointer !text-[22px]" />
                         </button>
                     </div>
                 </div>
