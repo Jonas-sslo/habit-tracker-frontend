@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import HabitsForm from '../components/features/home/HabitsForm';
 import { deleteHabit, getHabits } from '../../services/habits';
 import { format, isSameDay, parseISO, subDays } from 'date-fns';
-import { format, isSameDay, parseISO, subDays } from 'date-fns';
 import { useTheme } from 'next-themes';
 
 import HabitsList from '../components/features/home/HabitsList';
@@ -32,7 +31,6 @@ export default function Home() {
     const [showModal, setShowModal] = useState(false);
     const [showFilterModal, setShowFilterModal] = useState(false);
     const [showTagModal, setShowTagModal] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [filters, setFilters] = useState(
         { status: 'notConcluded', 
           order: 'alphabetical', 
