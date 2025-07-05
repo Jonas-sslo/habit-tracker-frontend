@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import Layout from '../../components/Layout';
 import Button from '../../components/Button';
 import { getGray300Or600, getHomeBg } from '../../utils/theme';
 import { useTheme } from 'next-themes';

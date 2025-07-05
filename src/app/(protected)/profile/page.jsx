@@ -7,7 +7,6 @@ import { AccountCircle } from '@mui/icons-material';
 import Input from '../../components/features/auth/Input';
 import { getUser } from './actions';
 import { useTheme } from 'next-themes';
-import Layout from '../../components/Layout';
 import Divider from '../../components/Divider';
 import { getHomeBg } from '../../utils/theme';
 

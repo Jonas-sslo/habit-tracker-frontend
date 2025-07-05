@@ -14,7 +14,6 @@ import StreakCard from '../../components/features/home/StreakCard';
 import CalendarCard from '../../components/features/home/CalendarCard';
 import ActionsButtons from '../../components/features/home/ActionsButtons';
 import { getGray300Or600, getHomeBg } from '../../utils/theme';
-import Layout from '../../components/Layout';
 import { createTag, getTags } from '@/services/tags';
 import DeleteConfirmationModal from '../../components/features/home/DeleteConfirmationModal';
 
