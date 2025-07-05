@@ -38,7 +38,9 @@ export default function Profile() {
 
     return (
         <Layout>
-            <div className={`${getHomeBg(theme)} flex flex-col md:flex-row h-auto min-h-screen overflow-x-hidden`}>
+            <div
+                className={`${getHomeBg(theme)} flex flex-col md:flex-row h-auto min-h-screen overflow-x-hidden`}
+            >
                 <div className="flex-1">
                     <div className="py-6 text-center md:text-left p-4">
                         <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold">
@@ -62,9 +64,7 @@ export default function Profile() {
                                         className="rounded-full object-cover border-4 border-gray-200 w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72"
                                     />
                                 ) : (
-                                    <AccountCircle
-                                        className="text-gray-400 !w-48 !h-48 sm:!w-60 sm:!h-60 md:!w-72 md:!h-72"
-                                    />
+                                    <AccountCircle className="text-gray-400 !w-48 !h-48 sm:!w-60 sm:!h-60 md:!w-72 md:!h-72" />
                                 )}
                             </div>
                             <div className="flex flex-col gap-4 w-full">

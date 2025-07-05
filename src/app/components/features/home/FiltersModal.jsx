@@ -3,10 +3,10 @@ import Button from '../../Button';
 
 export default function FiltersModal({ filters, setFilters, onApply, onClose, theme }) {
     const frequencies = {
-      daily: 'Diário',
-      weekly: 'Semanal',
-      monthly: 'Mensal',
-      yearly: 'Anual'
+        daily: 'Diário',
+        weekly: 'Semanal',
+        monthly: 'Mensal',
+        yearly: 'Anual',
     };
 
     return (

@@ -161,10 +161,7 @@ function SidebarButton({ icon, text, isOpen, onClick, active }) {
     const hoverStyle = 'hover:bg-white/10 hover:border-white border-transparent';
 
     return (
-        <button
-            onClick={onClick}
-            className={`${baseStyle} ${active ? activeStyle : hoverStyle}`}
-        >
+        <button onClick={onClick} className={`${baseStyle} ${active ? activeStyle : hoverStyle}`}>
             <div className="min-w-[36px] flex justify-center">{icon}</div>
             {isOpen && <span className="text-sm">{text}</span>}
         </button>

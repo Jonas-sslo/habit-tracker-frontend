@@ -21,7 +21,7 @@ export default function TagsModal({ newTag, setNewTag, onAddTag, onClose, theme 
                 />
                 <Button
                     onClick={onAddTag}
-                    color='yellow'
+                    color="yellow"
                     className="hover:bg-yellow-400 text-white w-full py-2 rounded-md font-semibold mb-2 focus:ring-yellow-400"
                 >
                     Adicionar

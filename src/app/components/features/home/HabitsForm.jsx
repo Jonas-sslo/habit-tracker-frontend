@@ -21,9 +21,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
         if (isEditing) {
             const editingHabit = {
                 ...isEditing,
-                tags: Array.isArray(isEditing.tags)
-                    ? isEditing.tags.map(t => t.name)
-                    : [],
+                tags: Array.isArray(isEditing.tags) ? isEditing.tags.map((t) => t.name) : [],
             };
             setNewHabit(editingHabit);
         } else setNewHabit({ name: '', frequency: '', description: '', tags: [] });
@@ -35,13 +33,12 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
     };
 
     const handleTagsChange = (selectedTags) => {
-        setNewHabit(prev => ({ ...prev, tags: selectedTags }));
+        setNewHabit((prev) => ({ ...prev, tags: selectedTags }));
     };
-
 
     const handleSubmit = async () => {
         try {
-            const habitData = {...newHabit, tags: newHabit.tags};
+            const habitData = { ...newHabit, tags: newHabit.tags };
             if (isEditing) {
                 const updatedHabit = await updateHabit(isEditing.id, habitData);
                 onEdit(updatedHabit);

@@ -75,7 +75,7 @@ export function getButtonClass({
                 'border border-[#96031A] text-[#96031A] hover:bg-[#C12F40] hover:text-black hover:brightness-110',
             ghost: 'text-[#96031A] hover:bg-[#96031A]/10 hover:brightness-110',
             disabled: 'bg-[#96031A] text-black opacity-50 cursor-not-allowed',
-        }
+        },
     };
 
     const selectedStyle = colors[color]?.[variant] || colors.primary.solid;
