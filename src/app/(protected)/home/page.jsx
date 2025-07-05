@@ -30,13 +30,12 @@ export default function Home() {
     const [showModal, setShowModal] = useState(false);
     const [showFilterModal, setShowFilterModal] = useState(false);
     const [showTagModal, setShowTagModal] = useState(false);
-    const [filters, setFilters] = useState(
-        { status: 'notConcluded', 
-          order: 'alphabetical', 
-          frequency: 'daily',
-          selectedTags: []
-        }
-    );
+    const [filters, setFilters] = useState({
+        status: 'notConcluded',
+        order: 'alphabetical',
+        frequency: 'daily',
+        selectedTags: [],
+    });
     const [currentFilters, setCurrentFilters] = useState(filters);
     const [deleteModal, setDeleteModal] = useState({
         isOpen: false,
@@ -118,7 +117,8 @@ export default function Home() {
                 return h.frequency === currentFilters.frequency;
             })
             .filter((h) => {
-                if (!currentFilters.selectedTags || currentFilters.selectedTags.length === 0) return true;
+                if (!currentFilters.selectedTags || currentFilters.selectedTags.length === 0)
+                    return true;
                 return h.tags?.some((t) => currentFilters.selectedTags.includes(t.name));
             })
             .sort((a, b) => {
@@ -151,111 +151,107 @@ export default function Home() {
     if (!mounted) return null;
 
     return (
-                <div className={`flex flex-col md:flex-row h-screen ${getHomeBg(theme)} relative`}>
-                    <div className="flex-1 flex flex-col overflow-y-auto">
-                        <div className="flex flex-col justify-center border-b-[1px] border-b-[#2549BE] px-8 pt-4">
-                            <h1 className="text-2xl lg:text-4xl font-semibold mb-1">
-                                Olá, {userName}
-                            </h1>
-                            <p className={`text-sm lg:text-base mb-6 ${getGray300Or600(theme)}`}>
-                                Constância começa com clareza. Veja seus hábitos de hoje:
-                            </p>
-                        </div>
+        <div className={`flex flex-col md:flex-row h-screen ${getHomeBg(theme)} relative`}>
+            <div className="flex-1 flex flex-col overflow-y-auto">
+                <div className="flex flex-col justify-center border-b-[1px] border-b-[#2549BE] px-8 pt-4">
+                    <h1 className="text-2xl lg:text-4xl font-semibold mb-1">Olá, {userName}</h1>
+                    <p className={`text-sm lg:text-base mb-6 ${getGray300Or600(theme)}`}>
+                        Constância começa com clareza. Veja seus hábitos de hoje:
+                    </p>
+                </div>
 
-                        <div className="flex flex-col lg:flex-row h-full overflow-y-auto">
-                            <div className="w-full lg:w-4/6 h-fit lg:h-full border-b lg:border-b-0 lg:border-r-[1px] border-[#2549BE] px-4 lg:px-8 py-4 lg:py-6 gap-6 flex flex-col">
-                                <div className="flex flex-col lg:flex-row items-center gap-3 lg:justify-between">
-                                    <h2 className="text-xl lg:text-2xl font-semibold">
-                                        Seus hábitos
-                                    </h2>
-                                    <ActionsButtons
-                                        onAddTagClick={() => setShowTagModal(true)}
-                                        onAddHabitClick={() => {
-                                            setIsEditing(null);
-                                            setShowModal(true);
-                                        }}
-                                        onFilterClick={() => setShowFilterModal(true)}
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-4 h-full overflow-y-auto py-2">
-                                    <HabitsList
-                                        habits={habits}
-                                        applyFilters={applyFilters}
-                                        filters={filters}
-                                        onEdit={(habit) => {
-                                            setIsEditing(habit);
-                                            setShowModal(true);
-                                        }}
-                                        onDelete={handleDelete}
-                                    />
-                                </div>
-                            </div>
-                            <div className="w-full lg:w-2/6 flex flex-col gap-6 px-4 lg:px-8 py-4 md:py-6">
-                                <StreakCard activeStreak={activeStreak} theme={theme} />
-                                <CalendarCard
-                                    calendarValue={calendarValue}
-                                    setCalendarValue={setCalendarValue}
-                                    habits={habits}
-                                    theme={theme}
-                                />
-                            </div>
+                <div className="flex flex-col lg:flex-row h-full overflow-y-auto">
+                    <div className="w-full lg:w-4/6 h-fit lg:h-full border-b lg:border-b-0 lg:border-r-[1px] border-[#2549BE] px-4 lg:px-8 py-4 lg:py-6 gap-6 flex flex-col">
+                        <div className="flex flex-col lg:flex-row items-center gap-3 lg:justify-between">
+                            <h2 className="text-xl lg:text-2xl font-semibold">Seus hábitos</h2>
+                            <ActionsButtons
+                                onAddTagClick={() => setShowTagModal(true)}
+                                onAddHabitClick={() => {
+                                    setIsEditing(null);
+                                    setShowModal(true);
+                                }}
+                                onFilterClick={() => setShowFilterModal(true)}
+                            />
+                        </div>
+                        <div className="flex flex-col gap-4 h-full overflow-y-auto py-2">
+                            <HabitsList
+                                habits={habits}
+                                applyFilters={applyFilters}
+                                filters={filters}
+                                onEdit={(habit) => {
+                                    setIsEditing(habit);
+                                    setShowModal(true);
+                                }}
+                                onDelete={handleDelete}
+                            />
                         </div>
                     </div>
-
-                    {showModal && (
-                        <HabitsForm
-                            isEditing={isEditing}
-                            onClose={() => {
-                                setShowModal(false);
-                                setIsEditing(null);
-                            }}
-                            onAdd={async () => {
-                                const createdHabits = await getHabits();
-                                setHabits(createdHabits);
-                                setShowModal(false);
-                            }}
-                            onEdit={async () => {
-                                const updatedHabits = await getHabits();
-                                setHabits(updatedHabits);
-                                setShowModal(false);
-                            }}
-                            tags={tags.map((t) => ({ value: t.name, label: t.name }))}
-                        />
-                    )}
-
-                {showFilterModal && (
-                    <FiltersModal
-                        filters={filters}
-                        setFilters={setFilters}
-                        onApply={() => {
-                            setCurrentFilters(filters);
-                            setShowFilterModal(false);
-                        }}
-                        onClose={() => setShowFilterModal(false)}
-                        tags={tags}
-                        theme={theme}
-                    />
-                )}
-
-                    {showTagModal && (
-                        <TagsModal
-                            newTag={newTag}
-                            setNewTag={setNewTag}
-                            onAddTag={handleAddTag}
-                            onClose={() => setShowTagModal(false)}
+                    <div className="w-full lg:w-2/6 flex flex-col gap-6 px-4 lg:px-8 py-4 md:py-6">
+                        <StreakCard activeStreak={activeStreak} theme={theme} />
+                        <CalendarCard
+                            calendarValue={calendarValue}
+                            setCalendarValue={setCalendarValue}
+                            habits={habits}
                             theme={theme}
                         />
-                    )}
-
-                    {deleteModal.isOpen && (
-                        <DeleteConfirmationModal
-                            isOpen={deleteModal.isOpen}
-                            onClose={() =>
-                                setDeleteModal({ isOpen: false, habitId: null, onConfirm: null })
-                            }
-                            onConfirm={deleteModal.onConfirm}
-                        />
-                    )}
+                    </div>
                 </div>
+            </div>
+
+            {showModal && (
+                <HabitsForm
+                    isEditing={isEditing}
+                    onClose={() => {
+                        setShowModal(false);
+                        setIsEditing(null);
+                    }}
+                    onAdd={async () => {
+                        const createdHabits = await getHabits();
+                        setHabits(createdHabits);
+                        setShowModal(false);
+                    }}
+                    onEdit={async () => {
+                        const updatedHabits = await getHabits();
+                        setHabits(updatedHabits);
+                        setShowModal(false);
+                    }}
+                    tags={tags.map((t) => ({ value: t.name, label: t.name }))}
+                />
+            )}
+
+            {showFilterModal && (
+                <FiltersModal
+                    filters={filters}
+                    setFilters={setFilters}
+                    onApply={() => {
+                        setCurrentFilters(filters);
+                        setShowFilterModal(false);
+                    }}
+                    onClose={() => setShowFilterModal(false)}
+                    tags={tags}
+                    theme={theme}
+                />
+            )}
+
+            {showTagModal && (
+                <TagsModal
+                    newTag={newTag}
+                    setNewTag={setNewTag}
+                    onAddTag={handleAddTag}
+                    onClose={() => setShowTagModal(false)}
+                    theme={theme}
+                />
+            )}
+
+            {deleteModal.isOpen && (
+                <DeleteConfirmationModal
+                    isOpen={deleteModal.isOpen}
+                    onClose={() =>
+                        setDeleteModal({ isOpen: false, habitId: null, onConfirm: null })
+                    }
+                    onConfirm={deleteModal.onConfirm}
+                />
+            )}
+        </div>
     );
 }

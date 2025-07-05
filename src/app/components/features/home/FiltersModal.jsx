@@ -61,13 +61,13 @@ export default function FiltersModal({ filters, setFilters, onApply, onClose, ta
                         ))}
                     </div>
                 </div>
-                           
+
                 <MultiSelect
                     id="tags"
                     name="tags"
                     label="Tags"
                     placeholder="Selecione as tags"
-                    options={tags.map(t => ({ value: t.name, label: t.name }))}
+                    options={tags.map((t) => ({ value: t.name, label: t.name }))}
                     value={filters.selectedTags || []}
                     onChange={(selected) => setFilters({ ...filters, selectedTags: selected })}
                     theme={theme}

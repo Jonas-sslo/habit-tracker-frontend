@@ -34,17 +34,16 @@ export function AuthProvider({ children }) {
         loadUserFromToken();
     }, [loadUserFromToken]);
 
-    const value = useMemo(() => ({
-        user,
-        loading,
-        setUser,
-    }), [user, loading]);
-
-    return (
-        <AuthContext.Provider value={value}>
-            {children}
-        </AuthContext.Provider>
+    const value = useMemo(
+        () => ({
+            user,
+            loading,
+            setUser,
+        }),
+        [user, loading],
     );
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {

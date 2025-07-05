@@ -12,7 +12,7 @@ export default function HabitsList({ habits, onEdit, onDelete, applyFilters }) {
                     className="flex justify-between items-center bg-white rounded-[18px] shadow-lg px-4 py-4"
                 >
                     <div className="flex items-center gap-3">
-                        <AccessTimeOutlined fontSize="large"/>
+                        <AccessTimeOutlined fontSize="large" />
                         <div>
                             <div className="text-sm md:text-base font-medium dark:text-[#1A1A1A]">
                                 {habit.name}
