@@ -63,7 +63,7 @@ export default function Sidebar({ open = false, onClose }) {
                         {isOpen && (
                             <button
                                 onClick={onClose}
-                                className="p-2 rounded-lg border-2 border-transparent hover:border-white hover:bg-white/10 md:hidden transition-colors"
+                                className="p-2 rounded-lg border-2 border-transparent hover:cursor-pointer hover:border-white hover:bg-white/10 md:hidden transition-colors"
                                 aria-label="Fechar menu"
                             >
                                 <CloseRounded />
@@ -72,7 +72,7 @@ export default function Sidebar({ open = false, onClose }) {
 
                         <button
                             onClick={toggleSidebar}
-                            className="p-2 rounded-lg border-2 border-transparent hover:border-white hover:bg-white/10 transition-colors"
+                            className="p-2 rounded-lg border-2 border-transparent hover:cursor-pointer hover:border-white hover:bg-white/10 transition-colors"
                         >
                             {isOpen ? <ArrowBackRounded /> : <ArrowForwardRounded />}
                         </button>
@@ -158,7 +158,8 @@ function SidebarButton({ icon, text, isOpen, onClick, active }) {
     const baseStyle =
         'flex items-center space-x-3 p-2 rounded-xl border-2 w-full transition-colors';
     const activeStyle = 'bg-white/10 border-white';
-    const hoverStyle = 'hover:bg-white/10 hover:border-white border-transparent';
+    const hoverStyle =
+        'hover:bg-white/10 hover:border-white hover:cursor-pointer border-transparent';
 
     return (
         <button onClick={onClick} className={`${baseStyle} ${active ? activeStyle : hoverStyle}`}>

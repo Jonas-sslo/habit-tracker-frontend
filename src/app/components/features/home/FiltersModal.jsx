@@ -4,6 +4,13 @@ import { FREQUENCIES } from '@/app/utils/frequencies';
 import { MultiSelect } from './MultiSelect';
 
 export default function FiltersModal({ filters, setFilters, onApply, onClose, tags, theme }) {
+    const unselectedBtnClass =
+        theme === 'dark'
+            ? '!bg-gray-700 !text-gray-100 !hover:bg-gray-600'
+            : '!bg-gray-200 !text-black !hover:bg-gray-300';
+
+    const selectedBtnClass = '!text-white !bg-[#2549BE]';
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div
@@ -16,13 +23,21 @@ export default function FiltersModal({ filters, setFilters, onApply, onClose, ta
                     <div className="flex gap-2 flex-wrap">
                         <Button
                             onClick={() => setFilters({ ...filters, status: 'concluded' })}
-                            className={`px-3 py-1 text-black rounded-md ${filters.status === 'concluded' ? 'text-white' : '!bg-gray-200'}`}
+                            className={`px-3 py-1 rounded-md ${
+                                filters.status === 'concluded'
+                                    ? selectedBtnClass
+                                    : unselectedBtnClass
+                            }`}
                         >
                             Concluído
                         </Button>
                         <Button
                             onClick={() => setFilters({ ...filters, status: 'notConcluded' })}
-                            className={`px-3 py-1 rounded-md ${filters.status === 'notConcluded' ? 'text-white' : '!bg-gray-200'}`}
+                            className={`px-3 py-1 rounded-md ${
+                                filters.status === 'notConcluded'
+                                    ? selectedBtnClass
+                                    : unselectedBtnClass
+                            }`}
                         >
                             Não concluído
                         </Button>
@@ -34,13 +49,19 @@ export default function FiltersModal({ filters, setFilters, onApply, onClose, ta
                     <div className="flex gap-2 flex-wrap">
                         <Button
                             onClick={() => setFilters({ ...filters, order: 'alphabetical' })}
-                            className={`px-3 py-1 rounded-md ${filters.order === 'alphabetical' ? 'text-white' : '!bg-gray-200'}`}
+                            className={`px-3 py-1 rounded-md ${
+                                filters.order === 'alphabetical'
+                                    ? selectedBtnClass
+                                    : unselectedBtnClass
+                            }`}
                         >
                             Alfabética
                         </Button>
                         <Button
                             onClick={() => setFilters({ ...filters, order: 'duration' })}
-                            className={`px-3 py-1 rounded-md ${filters.order === 'duration' ? 'text-white' : '!bg-gray-200'}`}
+                            className={`px-3 py-1 rounded-md ${
+                                filters.order === 'duration' ? selectedBtnClass : unselectedBtnClass
+                            }`}
                         >
                             Duração
                         </Button>
@@ -54,7 +75,11 @@ export default function FiltersModal({ filters, setFilters, onApply, onClose, ta
                             <Button
                                 key={value}
                                 onClick={() => setFilters({ ...filters, frequency: value })}
-                                className={`px-3 py-1 rounded-md ${filters.frequency === value ? 'text-white' : '!bg-gray-200'}`}
+                                className={`px-3 py-1 rounded-md ${
+                                    filters.frequency === value
+                                        ? selectedBtnClass
+                                        : unselectedBtnClass
+                                }`}
                             >
                                 {label}
                             </Button>
@@ -81,7 +106,7 @@ export default function FiltersModal({ filters, setFilters, onApply, onClose, ta
                 </Button>
                 <button
                     onClick={onClose}
-                    className={`${getGray300Or600(theme)} text-sm underline w-full text-center`}
+                    className={`${getGray300Or600(theme)} text-sm underline w-full text-center hover:cursor-pointer`}
                 >
                     Cancelar
                 </button>

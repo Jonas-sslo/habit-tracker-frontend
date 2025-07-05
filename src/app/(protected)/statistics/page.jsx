@@ -165,6 +165,7 @@ export default function StatisticsPage() {
                             name="startDate"
                             value={filters.startDate}
                             onChange={handleChange}
+                            theme={theme}
                             className="!mb-0"
                         />
                         <Input
@@ -172,6 +173,7 @@ export default function StatisticsPage() {
                             name="endDate"
                             value={filters.endDate}
                             onChange={handleChange}
+                            theme={theme}
                             className="!mb-0"
                         />
                     </div>

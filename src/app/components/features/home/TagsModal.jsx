@@ -8,7 +8,9 @@ export default function TagsModal({ newTag, setNewTag, onAddTag, onClose, theme 
             <div
                 className={`${getBg(theme)} border-2 border-yellow-400 rounded-2xl shadow-lg p-6 w-[90%] max-w-md`}
             >
-                <h2 className="text-center text-lg font-semibold mb-4 light:text-black">
+                <h2
+                    className={`${theme === 'light' ? 'text-black' : 'text-white'} text-center text-lg font-semibold mb-4`}
+                >
                     Adicione uma tag
                 </h2>
                 <Input
@@ -17,6 +19,7 @@ export default function TagsModal({ newTag, setNewTag, onAddTag, onClose, theme 
                     value={newTag}
                     onChange={(e) => setNewTag(e.target.value)}
                     placeholder="Nome da Tag"
+                    theme={theme}
                     className="focus:ring-yellow-400"
                 />
                 <Button
@@ -29,7 +32,7 @@ export default function TagsModal({ newTag, setNewTag, onAddTag, onClose, theme 
 
                 <button
                     onClick={onClose}
-                    className={`${getGray300Or600(theme)} text-sm underline w-full text-center`}
+                    className={`${getGray300Or600(theme)} text-sm underline w-full text-center hover:cursor-pointer`}
                 >
                     Cancelar
                 </button>

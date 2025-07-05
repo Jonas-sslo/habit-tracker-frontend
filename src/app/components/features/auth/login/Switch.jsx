@@ -1,6 +1,5 @@
 'use client';
 
-import { getGray300Or600 } from '@/app/utils/theme';
 import { useEffect, useState } from 'react';
 
 export default function Switch({
@@ -8,7 +7,7 @@ export default function Switch({
     label = 'Manter conectado',
     checked = false,
     onChange,
-    theme,
+    theme = 'light', // adicione essa prop para controlar o tema
 }) {
     const [isMounted, setIsMounted] = useState(false);
 
@@ -34,7 +33,7 @@ export default function Switch({
                 onClick={toggleSwitch}
                 type="button"
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none ${
-                    checked ? 'bg-[#2549BE]' : 'bg-gray-300'
+                    checked ? 'bg-[#2549BE]' : theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300'
                 }`}
             >
                 <span
@@ -43,7 +42,12 @@ export default function Switch({
                     }`}
                 />
             </button>
-            <label htmlFor={id} className={`${getGray300Or600} text-sm font-medium`}>
+            <label
+                htmlFor={id}
+                className={`text-sm font-medium ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                }`}
+            >
                 {label}
             </label>
         </div>

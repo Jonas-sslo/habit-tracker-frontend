@@ -117,7 +117,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                 </Button>
                 <button
                     onClick={onClose}
-                    className={`${getGray300Or600(theme)} text-sm underline w-full text-center`}
+                    className={`${getGray300Or600(theme)} text-sm underline w-full text-center hover:cursor-pointer`}
                 >
                     Cancelar
                 </button>

@@ -4,7 +4,8 @@ import { Instagram, LinkedIn } from '@mui/icons-material';
 export default function Footer() {
     return (
         <div className="w-full h-auto px-8 md:px-16 xl:px-32 lg:px-24 mb-16">
-            <div className="flex flex-col items-center justify-center rounded-[40px] 
+            <div
+                className="flex flex-col items-center justify-center rounded-[40px] 
                 bg-[#1B1B1E] text-white light:bg-white light:text-black 
                 px-6 sm:px-12 py-12 sm:py-16 gap-8 w-full"
             >
@@ -39,7 +40,9 @@ export default function Footer() {
 
                 <hr className="border-[#1F2937] light:border-[#D1D5DB] w-full" />
 
-                <p className="text-[#6B7280] light:text-[#9CA3AF] text-xs sm:text-sm">© 2025 Constantia</p>
+                <p className="text-[#6B7280] light:text-[#9CA3AF] text-xs sm:text-sm">
+                    © 2025 Constantia
+                </p>
             </div>
         </div>
     );

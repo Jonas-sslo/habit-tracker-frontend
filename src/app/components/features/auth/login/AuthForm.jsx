@@ -22,12 +22,12 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
         password: '',
         rememberMe: false,
     });
+
     const { theme } = useTheme();
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => setMounted(true), []);
-
     if (!mounted) return null;
 
     const handleChange = (e) => {
@@ -49,14 +49,13 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
 
         const data = await loginWithGoogleToken(token);
 
-        console.log('Dados recebidos do Google:', data);
-
         if (!data?.token) throw new Error('Token não recebido do Google');
 
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.name));
         localStorage.setItem('avatar', data.avatar || '');
         localStorage.setItem('userId', data.userId);
+
         router.push('/home');
     };
 
@@ -77,12 +76,26 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                         width={35}
                         height={35}
                     />
-                    <h2 className="text-2xl font-bold">Constantia</h2>
+                    <h2
+                        className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+                    >
+                        Constantia
+                    </h2>
                 </div>
 
-                <h3 className="text-2xl font-semibold mb-4">É bom te ver de novo</h3>
+                <h3
+                    className={`text-2xl font-semibold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+                >
+                    É bom te ver de novo
+                </h3>
 
-                {error && <div className="mb-4 text-red-600">{error}</div>}
+                {error && (
+                    <div
+                        className={`mb-4 text-sm ${theme === 'dark' ? 'text-red-500' : 'text-red-600'}`}
+                    >
+                        {error}
+                    </div>
+                )}
 
                 <Input
                     id="email"
@@ -95,7 +108,13 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
                     required
                 />
 
-                {emailError && <div className="mb-4 text-red-500 text-sm">{emailError}</div>}
+                {emailError && (
+                    <div
+                        className={`mb-4 text-sm ${theme === 'dark' ? 'text-red-500' : 'text-red-600'}`}
+                    >
+                        {emailError}
+                    </div>
+                )}
 
                 <PasswordInput
                     id="password"
@@ -129,9 +148,12 @@ export default function AuthForm({ onSubmit, error, onClearError }) {
             />
 
             <div className="flex flex-col justify-between items-center h-full mt-6">
-                <span className={`${getGray300Or600} text-sm`}>
+                <span className={`${getGray300Or600(theme)} text-sm`}>
                     Não tem uma conta?{' '}
-                    <Link href="/register" className="text-[#2549BE]">
+                    <Link
+                        href="/register"
+                        className={`${theme === 'dark' ? 'text-[#5A8BFF]' : 'text-[#2549BE]'}`}
+                    >
                         Registre-se agora
                     </Link>
                 </span>

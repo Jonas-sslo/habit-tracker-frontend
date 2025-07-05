@@ -16,9 +16,11 @@ export default function Input({ id, label, type = 'text', text, showText, theme,
                 id={id}
                 type={type}
                 {...props}
-                className={`w-full bg-gray-100 border border-gray-300 
-                    rounded-md px-3 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2549BE]
-                    placeholder-gray-400 text-sm text-gray-900 ${props.className || ''}`}
+                className={`w-full rounded-md px-3 py-3 shadow-sm border focus:outline-none focus:ring-2 focus:ring-[#2549BE] placeholder-gray-400 text-sm ${
+                    theme === 'dark'
+                        ? 'bg-gray-800 border-gray-600 text-gray-100 placeholder-gray-500'
+                        : 'bg-gray-100 border-gray-300 text-black placeholder-gray-400'
+                } ${props.className || ''}`}
             />
         </div>
     );

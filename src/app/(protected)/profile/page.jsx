@@ -48,7 +48,7 @@ export default function Profile() {
                 </div>
 
                 <div className="w-full my-6">
-                    <Divider color='#2549BE' />
+                    <Divider color="#2549BE" />
                 </div>
 
                 <div className="flex flex-col items-center mt-8">
