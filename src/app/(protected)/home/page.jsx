@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import HabitsForm from '../../components/features/home/HabitsForm';
 import { deleteHabit, getHabits } from '../../../services/habits';
+import { toggleConcludeHabit } from '../../../services/habits';
 import { format, isSameDay, parseISO, subDays } from 'date-fns';
 import { useTheme } from 'next-themes';
 
@@ -16,6 +17,7 @@ import { getGray300Or600, getHomeBg } from '../../utils/theme';
 import Layout from '../../components/Layout';
 import { createTag, getTags } from '@/services/tags';
 import DeleteConfirmationModal from '../../components/features/home/DeleteConfirmationModal';
+
 
 export default function Home() {
     const { theme } = useTheme();
@@ -132,6 +134,20 @@ export default function Home() {
             });
     };
 
+    const handleToggleConclude = async (habitId) => {
+   
+        try {
+          await toggleConcludeHabit(habitId);
+          const updatedHabits = await getHabits();
+        
+          setHabits(updatedHabits);
+          calculateSequency(updatedHabits);
+        } catch (error) {
+          console.error('Erro ao concluir hábito:', error);
+        }
+      };
+      
+
     const handleDelete = async (id) => {
         setDeleteModal({
             isOpen: true,
@@ -183,6 +199,7 @@ export default function Home() {
                                     setShowModal(true);
                                 }}
                                 onDelete={handleDelete}
+                                onToggleConclude={handleToggleConclude}
                             />
                         </div>
                     </div>

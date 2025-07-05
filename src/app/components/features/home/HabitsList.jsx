@@ -3,7 +3,7 @@ import { AccessTimeOutlined, Edit } from '@mui/icons-material';
 import { Delete } from '@mui/icons-material';
 import { Check } from '@mui/icons-material';
 
-export default function HabitsList({ habits, onEdit, onDelete, applyFilters }) {
+export default function HabitsList({ habits, onEdit, onDelete, onToggleConclude, applyFilters,  }) {
     return (
         <div className="flex flex-col gap-3">
             {applyFilters(habits).map((habit) => (
@@ -30,7 +30,7 @@ export default function HabitsList({ habits, onEdit, onDelete, applyFilters }) {
                         <button onClick={() => onDelete(habit.id)}>
                             <Delete className="text-[#96031A] hover:text-[#C12F40] cursor-pointer !text-[22px]" />
                         </button>
-                        <button onClick={() => onDelete(habit.id)}>
+                        <button onClick={() => onToggleConclude(habit.id)}>
                             <Check className="text-[#48998B] hover:text-[#77CBB9] cursor-pointer !text-[22px]" />
                         </button>
                     </div>

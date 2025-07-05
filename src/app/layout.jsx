@@ -4,7 +4,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from '@/app/(auth)/AuthContext';
 
 export const metadata = {
-    title: 'Constantia',
+    title: 'Constantia'
 };
 
 export const viewport = {
@@ -15,6 +15,9 @@ export const viewport = {
 export default function RootLayout({ children }) {
     return (
         <html lang="pt-br" suppressHydrationWarning>
+            <head>
+                <link rel="icon" href="/favicon.ico" />
+            </head>
             <body className="antialiased">
                 <AuthProvider>
                     <ThemeProvider attribute="class" enableSystem defaultTheme="system">

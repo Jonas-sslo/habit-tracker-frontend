@@ -31,3 +31,10 @@ export async function deleteHabit(id) {
     const response = await api.delete(`${BASE_URL}/delete/${id}`);
     return response.data;
 }
+
+export async function toggleConcludeHabit(id, date = new Date()) {
+    const response = await api.post(`${BASE_URL}/${id}/complete`, {
+        date,
+    });
+    return response.data;
+}

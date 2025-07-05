@@ -13,6 +13,17 @@ import { getTags } from '@/services/tags';
 import { MultiSelect } from '../../components/features/home/MultiSelect';
 import Select from '../../components/features/home/Select';
 import Input from '../../components/features/auth/Input';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
 export default function StatisticsPage() {
     const { theme } = useTheme();
@@ -121,6 +132,74 @@ export default function StatisticsPage() {
         doc.save('relatorio-habitos.pdf');
     };
 
+    const chartData = {
+        labels: data.map(habit => habit.title),
+        datasets: [
+            {
+                label: 'Esperado',
+                data: data.map(habit => habit.expected),
+                backgroundColor: '#000000',
+                borderColor: '#212121',
+                borderWidth: 1,
+
+            },
+            {
+                label: 'Positivos',
+                data: data.map(habit => habit.positive),
+                backgroundColor: '#4CAF50',
+                borderColor: '#388E3C',
+                borderWidth: 1,
+
+            },
+            {
+                label: 'Negativos',
+                data: data.map(habit => habit.negative),
+                backgroundColor: '#F44336',
+                borderColor: '#D32F2F',
+                borderWidth: 1,
+            },
+        ],
+    }
+
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 12
+                    },
+                    usePointStyle: true,
+                }
+            },
+            title: {
+                display: true,
+                text: 'Desempenho dos Hábitos',
+                font: {
+                    size: 14
+                }
+            },
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    font: {
+                        size: 10
+                    }
+                }
+            },
+            x: {
+                ticks: {
+                    font: {
+                        size: 10
+                    }
+                }
+            }
+        },
+    };
     return (
         <div className={`flex flex-col md:flex-row h-screen ${getHomeBg(theme)} relative`}>
             <div className="flex-1 flex flex-col overflow-y-auto">
@@ -193,49 +272,55 @@ export default function StatisticsPage() {
                             Baixar PDF
                         </Button>
                     </div>
-                    {/* Resultados */}
+
                     {loading && <p>Carregando...</p>}
                     {data.length > 0 && (
-                        <div className="overflow-x-auto">
-                            <table className="w-full border text-sm">
-                                <thead className="bg-gray-100">
-                                    <tr>
-                                        <th className="border p-2 text-left text-black">Hábito</th>
-                                        <th className="border p-2 text-left text-black">
-                                            Frequência
-                                        </th>
-                                        <th className="border p-2 text-center text-black">
-                                            Esperado
-                                        </th>
-                                        <th className="border p-2 text-center text-green-600">
-                                            Positivos
-                                        </th>
-                                        <th className="border p-2 text-center text-red-600">
-                                            Negativos
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {data.map((habit, idx) => (
-                                        <tr key={idx}>
-                                            <td className="border p-2">{habit.title}</td>
-                                            <td className="border p-2">
-                                                {FREQUENCIES[habit.frequency]}
-                                            </td>
-                                            <td className="border p-2 text-center">
-                                                {habit.expected}
-                                            </td>
-                                            <td className="border p-2 text-center">
-                                                {habit.positive}
-                                            </td>
-                                            <td className="border p-2 text-center">
-                                                {habit.negative}
-                                            </td>
+                        <>
+                            <div className="overflow-x-auto flex-1">
+                                <table className="w-full border text-sm">
+                                    <thead className="bg-gray-100">
+                                        <tr>
+                                            <th className="border p-2 text-left text-black">Hábito</th>
+                                            <th className="border p-2 text-left text-black">
+                                                Frequência
+                                            </th>
+                                            <th className="border p-2 text-center text-black">
+                                                Esperado
+                                            </th>
+                                            <th className="border p-2 text-center text-green-600">
+                                                Positivos
+                                            </th>
+                                            <th className="border p-2 text-center text-red-600">
+                                                Negativos
+                                            </th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                        {data.map((habit, idx) => (
+                                            <tr key={idx}>
+                                                <td className="border p-2">{habit.title}</td>
+                                                <td className="border p-2">
+                                                    {FREQUENCIES[habit.frequency]}
+                                                </td>
+                                                <td className="border p-2 text-center">
+                                                    {habit.expected}
+                                                </td>
+                                                <td className="border p-2 text-center">
+                                                    {habit.positive}
+                                                </td>
+                                                <td className="border p-2 text-center">
+                                                    {habit.negative}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div className="mt-4 bg-white p-4 rounded-lg shadow" style={{ height: '300px' }}>
+                                <Bar data={chartData} options={chartOptions} />
+                            </div>
+                        </>
                     )}
                 </div>
             </div>
