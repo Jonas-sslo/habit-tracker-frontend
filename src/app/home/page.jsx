@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import HabitsForm from '../components/features/home/HabitsForm';
 import { deleteHabit, getHabits } from '../../services/habits';
 import { format, isSameDay, parseISO, subDays } from 'date-fns';
+import { format, isSameDay, parseISO, subDays } from 'date-fns';
 import { useTheme } from 'next-themes';
 
 import HabitsList from '../components/features/home/HabitsList';
@@ -31,11 +32,14 @@ export default function Home() {
     const [showModal, setShowModal] = useState(false);
     const [showFilterModal, setShowFilterModal] = useState(false);
     const [showTagModal, setShowTagModal] = useState(false);
-    const [filters, setFilters] = useState({
-        status: 'notConcluded',
-        order: 'alphabetical',
-        frequency: 'daily',
-    });
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [filters, setFilters] = useState(
+        { status: 'notConcluded', 
+          order: 'alphabetical', 
+          frequency: 'daily',
+          selectedTags: []
+        }
+    );
     const [currentFilters, setCurrentFilters] = useState(filters);
     const [deleteModal, setDeleteModal] = useState({
         isOpen: false,
@@ -115,6 +119,10 @@ export default function Home() {
             .filter((h) => {
                 if (!currentFilters.frequency) return true;
                 return h.frequency === currentFilters.frequency;
+            })
+            .filter((h) => {
+                if (!currentFilters.selectedTags || currentFilters.selectedTags.length === 0) return true;
+                return h.tags?.some((t) => currentFilters.selectedTags.includes(t.name));
             })
             .sort((a, b) => {
                 if (currentFilters.order === 'alphabetical') {
@@ -220,18 +228,19 @@ export default function Home() {
                         />
                     )}
 
-                    {showFilterModal && (
-                        <FiltersModal
-                            filters={filters}
-                            setFilters={setFilters}
-                            onApply={() => {
-                                setCurrentFilters(filters);
-                                setShowFilterModal(false);
-                            }}
-                            onClose={() => setShowFilterModal(false)}
-                            theme={theme}
-                        />
-                    )}
+                {showFilterModal && (
+                    <FiltersModal
+                        filters={filters}
+                        setFilters={setFilters}
+                        onApply={() => {
+                            setCurrentFilters(filters);
+                            setShowFilterModal(false);
+                        }}
+                        onClose={() => setShowFilterModal(false)}
+                        tags={tags}
+                        theme={theme}
+                    />
+                )}
 
                     {showTagModal && (
                         <TagsModal

@@ -1,14 +1,9 @@
 import { getBg, getGray300Or600, getWhiteOrGray700 } from '@/app/utils/theme';
 import Button from '../../Button';
+import { FREQUENCIES } from '@/app/utils/frequencies';
+import { MultiSelect } from './MultiSelect';
 
-export default function FiltersModal({ filters, setFilters, onApply, onClose, theme }) {
-    const frequencies = {
-        daily: 'Diário',
-        weekly: 'Semanal',
-        monthly: 'Mensal',
-        yearly: 'Anual',
-    };
-
+export default function FiltersModal({ filters, setFilters, onApply, onClose, tags, theme }) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div
@@ -55,7 +50,7 @@ export default function FiltersModal({ filters, setFilters, onApply, onClose, th
                 <div className="mb-6">
                     <p className={`${getWhiteOrGray700(theme)} font-medium mb-1`}>Frequência</p>
                     <div className="flex gap-2 flex-wrap">
-                        {Object.entries(frequencies).map(([value, label]) => (
+                        {Object.entries(FREQUENCIES).map(([value, label]) => (
                             <Button
                                 key={value}
                                 onClick={() => setFilters({ ...filters, frequency: value })}
@@ -66,6 +61,17 @@ export default function FiltersModal({ filters, setFilters, onApply, onClose, th
                         ))}
                     </div>
                 </div>
+                           
+                <MultiSelect
+                    id="tags"
+                    name="tags"
+                    label="Tags"
+                    placeholder="Selecione as tags"
+                    options={tags.map(t => ({ value: t.name, label: t.name }))}
+                    value={filters.selectedTags || []}
+                    onChange={(selected) => setFilters({ ...filters, selectedTags: selected })}
+                    theme={theme}
+                />
 
                 <Button
                     onClick={onApply}

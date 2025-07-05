@@ -1,21 +1,26 @@
-import { Edit } from '@mui/icons-material';
+import { FREQUENCIES } from '@/app/utils/frequencies';
+import { AccessTimeOutlined, Edit } from '@mui/icons-material';
 import { Delete } from '@mui/icons-material';
 import { Check } from '@mui/icons-material';
 
-export default function HabitsList({ habits, onEdit, onDelete, filters, applyFilters }) {
+export default function HabitsList({ habits, onEdit, onDelete, applyFilters }) {
     return (
         <div className="flex flex-col gap-3">
             {applyFilters(habits).map((habit) => (
                 <div
                     key={habit.id}
-                    className="flex justify-between items-center bg-white rounded-[18px] shadow-lg px-8 py-4"
+                    className="flex justify-between items-center bg-white rounded-[18px] shadow-lg px-4 py-4"
                 >
-                    <div>
-                        <div className="text-sm md:text-base font-medium dark:text-[#1A1A1A]">
-                            {habit.name}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                            {habit.frequency} • {habit.tag}
+                    <div className="flex items-center gap-3">
+                        <AccessTimeOutlined fontSize="large"/>
+                        <div>
+                            <div className="text-sm md:text-base font-medium dark:text-[#1A1A1A]">
+                                {habit.name}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                                {habit.description} {habit.description && ' • '}
+                                {FREQUENCIES[habit.frequency] || habit.frequency}
+                            </div>
                         </div>
                     </div>
                     <div className="flex gap-5">
