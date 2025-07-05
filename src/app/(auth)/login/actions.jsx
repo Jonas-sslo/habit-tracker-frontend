@@ -2,8 +2,8 @@
 
 import { login } from '@/services/auth';
 
-export async function handleLogin({ email, password }) {
-    const data = await login({ email, password });
+export async function handleLogin({ email, password, rememberMe }) {
+    const data = await login({ email, password, rememberMe });
     const token = data?.token;
     if (!token) throw new Error('Token não recebido');
 
