@@ -1,22 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import HabitsForm from '../components/features/home/HabitsForm';
-import { deleteHabit, getHabits } from '../../services/habits';
+import HabitsForm from '../../components/features/home/HabitsForm';
+import { deleteHabit, getHabits } from '../../../services/habits';
 import { format, isSameDay, parseISO, subDays } from 'date-fns';
 import { useTheme } from 'next-themes';
 
-import HabitsList from '../components/features/home/HabitsList';
-import FiltersModal from '../components/features/home/FiltersModal';
-import TagsModal from '../components/features/home/TagsModal';
-import StreakCard from '../components/features/home/StreakCard';
-import CalendarCard from '../components/features/home/CalendarCard';
-import ActionsButtons from '../components/features/home/ActionsButtons';
-import { getGray300Or600, getHomeBg } from '../utils/theme';
-import Layout from '../components/Layout';
+import HabitsList from '../../components/features/home/HabitsList';
+import FiltersModal from '../../components/features/home/FiltersModal';
+import TagsModal from '../../components/features/home/TagsModal';
+import StreakCard from '../../components/features/home/StreakCard';
+import CalendarCard from '../../components/features/home/CalendarCard';
+import ActionsButtons from '../../components/features/home/ActionsButtons';
+import { getGray300Or600, getHomeBg } from '../../utils/theme';
+import Layout from '../../components/Layout';
 import { createTag, getTags } from '@/services/tags';
-import DeleteConfirmationModal from '../components/features/home/DeleteConfirmationModal';
-import AuthGuard from '../(auth)/AuthGuard';
+import DeleteConfirmationModal from '../../components/features/home/DeleteConfirmationModal';
 
 export default function Home() {
     const { theme } = useTheme();
@@ -152,8 +151,6 @@ export default function Home() {
     if (!mounted) return null;
 
     return (
-        <AuthGuard>
-            <Layout>
                 <div className={`flex flex-col md:flex-row h-screen ${getHomeBg(theme)} relative`}>
                     <div className="flex-1 flex flex-col overflow-y-auto">
                         <div className="flex flex-col justify-center border-b-[1px] border-b-[#2549BE] px-8 pt-4">
@@ -260,7 +257,5 @@ export default function Home() {
                         />
                     )}
                 </div>
-            </Layout>
-        </AuthGuard>
     );
 }

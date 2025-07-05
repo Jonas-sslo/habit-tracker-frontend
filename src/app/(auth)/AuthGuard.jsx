@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from './AuthContext';
@@ -9,11 +10,11 @@ export default function AuthGuard({ children }) {
 
     useEffect(() => {
         if (!loading && !user) {
-            router.push('/access-denied');
+            router.replace('/access-denied');
         }
-    }, [user, loading]);
+    }, [user, loading, router]);
 
-    if (loading || !user) return null;
+    if (loading) return null; // ou algum Spinner
 
-    return children;
+    return user ? children : null;
 }

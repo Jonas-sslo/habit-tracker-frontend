@@ -4,15 +4,15 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import Layout from '../components/Layout';
-import Button from '../components/Button';
-import { getGray300Or600, getHomeBg } from '../utils/theme';
+import Layout from '../../components/Layout';
+import Button from '../../components/Button';
+import { getGray300Or600, getHomeBg } from '../../utils/theme';
 import { useTheme } from 'next-themes';
-import { FREQUENCIES } from '../utils/frequencies';
+import { FREQUENCIES } from '../../utils/frequencies';
 import { getTags } from '@/services/tags';
-import { MultiSelect } from '../components/features/home/MultiSelect';
-import Select from '../components/features/home/Select';
-import Input from '../components/features/auth/Input';
+import { MultiSelect } from '../../components/features/home/MultiSelect';
+import Select from '../../components/features/home/Select';
+import Input from '../../components/features/auth/Input';
 
 export default function StatisticsPage() {
   const { theme } = useTheme();
@@ -123,7 +123,6 @@ export default function StatisticsPage() {
   
 
   return (
-    <Layout>
       <div className={`flex flex-col md:flex-row h-screen ${getHomeBg(theme)} relative`}>
         <div className="flex-1 flex flex-col overflow-y-auto">
           <div className="flex flex-col justify-center border-b-[1px] border-b-[#2549BE] px-8 pt-4">
@@ -222,6 +221,5 @@ export default function StatisticsPage() {
           </div>
         </div>
       </div>
-    </Layout>
   );
 }

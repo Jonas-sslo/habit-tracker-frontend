@@ -23,7 +23,7 @@ export default function Login() {
         try {
             const data = await handleLogin(formData);
             console.log('Login realizado: ', data);
-            router.push('/home');
+            window.location.href = '/home';
         } catch (err) {
             console.error('Erro no login: ', err.message);
             err.response?.status === 401

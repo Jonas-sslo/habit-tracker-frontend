@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext();
@@ -9,23 +9,48 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    const loadUserFromToken = useCallback(() => {
         const token = localStorage.getItem('token');
-        if (token) {
-            try {
-                const decoded = jwtDecode(token);
-                setUser(decoded);
-            } catch (e) {
-                console.error('Token inválido', e);
-                setUser(null);
-            }
+
+        if (!token) {
+            setUser(null);
+            setLoading(false);
+            return;
         }
-        setLoading(false);
+
+        try {
+            const decoded = jwtDecode(token);
+            setUser(decoded);
+        } catch (error) {
+            console.error('Token inválido:', error);
+            localStorage.removeItem('token');
+            setUser(null);
+        } finally {
+            setLoading(false);
+        }
     }, []);
 
-    return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>;
+    useEffect(() => {
+        loadUserFromToken();
+    }, [loadUserFromToken]);
+
+    const value = useMemo(() => ({
+        user,
+        loading,
+        setUser, // pode ser usado para login/logout depois
+    }), [user, loading]);
+
+    return (
+        <AuthContext.Provider value={value}>
+            {children}
+        </AuthContext.Provider>
+    );
 }
 
 export function useAuth() {
-    return useContext(AuthContext);
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth deve ser usado dentro de AuthProvider');
+    }
+    return context;
 }

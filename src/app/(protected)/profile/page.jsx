@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../../components/Sidebar';
 import Image from 'next/image';
 import { AccountCircle } from '@mui/icons-material';
-import Input from '../components/features/auth/Input';
+import Input from '../../components/features/auth/Input';
 import { getUser } from './actions';
 import { useTheme } from 'next-themes';
-import Layout from '../components/Layout';
-import Divider from '../components/Divider';
-import { getHomeBg } from '../utils/theme';
+import Layout from '../../components/Layout';
+import Divider from '../../components/Divider';
+import { getHomeBg } from '../../utils/theme';
 
 export default function Profile() {
     const { theme } = useTheme();
@@ -37,7 +37,6 @@ export default function Profile() {
     if (!mounted) return null;
 
     return (
-        <Layout>
             <div
                 className={`${getHomeBg(theme)} flex flex-col md:flex-row h-auto min-h-screen overflow-x-hidden`}
             >
@@ -75,6 +74,5 @@ export default function Profile() {
                     </div>
                 </div>
             </div>
-        </Layout>
     );
 }
