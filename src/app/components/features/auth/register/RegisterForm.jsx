@@ -93,7 +93,7 @@ export default function RegisterForm({ onSubmit, error, onClearError }) {
 
             <Divider className="my-6" />
 
-            <div className="flex flex-col justify-between items-center h-full mt-6 text-center gap-2">
+            <div className="flex flex-col justify-between items-center h-full text-center gap-2">
                 <span className="text-sm light:text-gray-600">
                     Já tem uma conta?{' '}
                     <Link href="/login" className="text-[#2549BE]">

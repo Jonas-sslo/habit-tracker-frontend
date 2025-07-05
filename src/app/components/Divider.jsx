@@ -1,7 +1,10 @@
-export default function Divider() {
+export default function Divider({ color = '#E0E0E0', className = '' }) {
     return (
-        <div className="flex items-center my-4">
-            <hr className="flex-grow border-gray-300" />
+        <div className={`flex items-center my-4 ${className}`}>
+            <hr
+                className="flex-grow h-px border-none"
+                style={{ backgroundColor: color }}
+            />
         </div>
     );
 }
