@@ -14,7 +14,7 @@ export default function AuthGuard({ children }) {
         }
     }, [user, loading, router]);
 
-    if (loading) return null; // ou algum Spinner
+    if (loading) return null;
 
     return user ? children : null;
 }

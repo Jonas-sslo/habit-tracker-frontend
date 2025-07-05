@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
     const value = useMemo(() => ({
         user,
         loading,
-        setUser, // pode ser usado para login/logout depois
+        setUser,
     }), [user, loading]);
 
     return (
