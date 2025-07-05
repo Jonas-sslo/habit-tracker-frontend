@@ -17,7 +17,6 @@ import { getGray300Or600, getHomeBg } from '../../utils/theme';
 import { createTag, getTags } from '@/services/tags';
 import DeleteConfirmationModal from '../../components/features/home/DeleteConfirmationModal';
 
-
 export default function Home() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);

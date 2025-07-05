@@ -1,22 +1,22 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { handleLogin } from './actions';
 import AuthForm from '../../components/features/auth/login/AuthForm';
 import Logo from '../../components/features/auth/Logo';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { getLogo } from '@/app/utils/theme';
+import { useRememberMe } from '@/app/hooks/useRememberMe';
 
 export default function Login() {
-    const router = useRouter();
+    const { loading } = useRememberMe();
     const [error, setError] = useState(null);
     const [mounted, setMounted] = useState(false);
     const { theme } = useTheme();
 
     useEffect(() => setMounted(true), []);
 
-    if (!mounted) return null;
+    if (loading || !mounted) return null;
 
     const handleSubmit = async (e, formData) => {
         e.preventDefault();
