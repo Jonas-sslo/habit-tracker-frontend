@@ -12,6 +12,7 @@ import { FREQUENCIES } from '../utils/frequencies';
 import { getTags } from '@/services/tags';
 import { MultiSelect } from '../components/features/home/MultiSelect';
 import Select from '../components/features/home/Select';
+import Input from '../components/features/auth/Input';
 
 export default function StatisticsPage() {
   const { theme } = useTheme();
@@ -138,11 +139,11 @@ export default function StatisticsPage() {
                 id="tags"
                 placeholder="Selecione as tags"
                 name="tags"
-               options={tags.map(tag => ({ value: tag.name, label: tag.name }))}
+                options={tags.map(t => ({ value: t.name, label: t.name }))}
                 value={filters.tags}
                 onChange={handleTagsChange}
                 theme={theme}
-                className="border p-2 rounded"
+                className="!mb-0"
               />
               <Select
                 id="frequency"
@@ -157,20 +158,21 @@ export default function StatisticsPage() {
                 value={filters.frequency}
                 theme={theme}
                 onChange={handleChange}
+                className="!mb-0"
               />
-              <input
+              <Input
                 type="date"
                 name="startDate"
                 value={filters.startDate}
                 onChange={handleChange}
-                className="border p-2 rounded"
+                className="!mb-0"
               />
-              <input
+              <Input
                 type="date"
                 name="endDate"
                 value={filters.endDate}
                 onChange={handleChange}
-                className="border p-2 rounded"
+                className="!mb-0"
               />
             </div>
             

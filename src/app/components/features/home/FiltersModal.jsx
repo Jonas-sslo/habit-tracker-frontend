@@ -1,8 +1,9 @@
 import { getBg, getGray300Or600, getWhiteOrGray700 } from '@/app/utils/theme';
 import Button from '../../Button';
 import { FREQUENCIES } from '@/app/utils/frequencies';
+import { MultiSelect } from './MultiSelect';
 
-export default function FiltersModal({ filters, setFilters, onApply, onClose, theme }) {
+export default function FiltersModal({ filters, setFilters, onApply, onClose, tags, theme }) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div
@@ -60,6 +61,17 @@ export default function FiltersModal({ filters, setFilters, onApply, onClose, th
                         ))}
                     </div>
                 </div>
+                           
+                <MultiSelect
+                    id="tags"
+                    name="tags"
+                    label="Tags"
+                    placeholder="Selecione as tags"
+                    options={tags.map(t => ({ value: t.name, label: t.name }))}
+                    value={filters.selectedTags || []}
+                    onChange={(selected) => setFilters({ ...filters, selectedTags: selected })}
+                    theme={theme}
+                />
 
                 <Button
                     onClick={onApply}

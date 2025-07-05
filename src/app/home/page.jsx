@@ -34,7 +34,8 @@ export default function Home() {
     const [filters, setFilters] = useState(
         { status: 'notConcluded', 
           order: 'alphabetical', 
-          frequency: 'daily' 
+          frequency: 'daily',
+          selectedTags: []
         }
     );
     const [currentFilters, setCurrentFilters] = useState(filters);
@@ -116,6 +117,10 @@ export default function Home() {
             .filter((h) => {
                 if (!currentFilters.frequency) return true;
                 return h.frequency === currentFilters.frequency;
+            })
+            .filter((h) => {
+                if (!currentFilters.selectedTags || currentFilters.selectedTags.length === 0) return true;
+                return h.tags?.some((t) => currentFilters.selectedTags.includes(t.name));
             })
             .sort((a, b) => {
                 if (currentFilters.order === 'alphabetical') {
@@ -225,6 +230,7 @@ export default function Home() {
                             setShowFilterModal(false);
                         }}
                         onClose={() => setShowFilterModal(false)}
+                        tags={tags}
                         theme={theme}
                     />
                 )}

@@ -105,7 +105,7 @@ export default function HabitsForm({ isEditing, onClose, onAdd, onEdit, tags }) 
                 <MultiSelect
                     id="tag"
                     label="Tags"
-                    placeholder="Selecione uma tag"
+                    placeholder="Selecione as tags"
                     options={tags}
                     value={newHabit.tags}
                     onChange={handleTagsChange}
