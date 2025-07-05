@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import HabitsForm from '../components/features/home/HabitsForm';
 import { deleteHabit, getHabits } from '../../services/habits';
-import { format, isSameDay, parseISO, set, subDays } from 'date-fns';
+import { format, isSameDay, parseISO, subDays } from 'date-fns';
 import { useTheme } from 'next-themes';
 
 import HabitsList from '../components/features/home/HabitsList';
@@ -15,7 +15,6 @@ import ActionsButtons from '../components/features/home/ActionsButtons';
 import { getGray300Or600, getHomeBg } from '../utils/theme';
 import Layout from '../components/Layout';
 import { createTag, getTags } from '@/services/tags';
-import { on } from 'events';
 import DeleteConfirmationModal from '../components/features/home/DeleteConfirmationModal';
 
 export default function Home() {
