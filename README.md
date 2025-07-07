@@ -1,3 +1,8 @@
+guilherme-hap (guilherme henrique) - SP3119467 
+kauenoites (kauê dias) - SP3125947 
+jonas-sslo (jonas sanjinez) - SP3121976 
+niculinhaz - (nicholas ferraz) - SP3121101
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
